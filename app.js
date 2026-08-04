@@ -9,6 +9,15 @@ const PRODUCTS = [
 
 const SHIPPING_COST = 3990;
 
+const PICKUP_POINTS = [
+  { id: 'pp1', name: 'Punto Providencia', address: 'Av. Providencia 1234, Providencia', hours: 'Lun a sáb, 10:00–20:00' },
+  { id: 'pp2', name: 'Punto Las Condes', address: 'Av. Apoquindo 4501, Las Condes', hours: 'Lun a sáb, 10:00–20:00' },
+  { id: 'pp3', name: 'Punto Santiago Centro', address: 'Agustinas 1035, Santiago', hours: 'Lun a vie, 09:00–19:00' },
+];
+
+let deliveryMethod = 'envio';
+let selectedPickupPointId = PICKUP_POINTS[0].id;
+
 // ---------------------------------------------------------------------------
 // Iconos SVG inline (sin dependencias externas)
 // ---------------------------------------------------------------------------
@@ -56,14 +65,26 @@ function getDeliveryEstimateText() {
   return `Llega entre el ${formatDayMonth(from)} y el ${formatDayMonth(to)}`;
 }
 
+function getPickupEstimateText() {
+  const today = new Date();
+  const ready = addBusinessDays(today, 2);
+  return `Disponible desde el ${formatDayMonth(ready)}`;
+}
+
 // ---------------------------------------------------------------------------
 // Cálculo de totales
 // ---------------------------------------------------------------------------
 function getSubtotal() {
   return PRODUCTS.reduce((sum, p) => sum + p.price * p.qty, 0);
 }
+function getShippingCost() {
+  return deliveryMethod === 'retiro' ? 0 : SHIPPING_COST;
+}
+function formatShipping(value) {
+  return value === 0 ? 'Gratis' : formatCLP(value);
+}
 function getTotal() {
-  return getSubtotal() + SHIPPING_COST;
+  return getSubtotal() + getShippingCost();
 }
 
 // ---------------------------------------------------------------------------
@@ -118,7 +139,7 @@ function goToConfirmation() {
 // Checkout por etapas
 // ---------------------------------------------------------------------------
 const CHECKOUT_STEPS = [
-  { id: 'step-direccion', screenName: 'checkout_direccion' },
+  { id: 'step-entrega', screenName: 'checkout_entrega' },
   { id: 'step-pago', screenName: 'checkout_pago' },
   { id: 'step-revision', screenName: 'checkout_revision' },
 ];
@@ -160,21 +181,83 @@ function updateStepButtons(stepNumber) {
 
 function fillReview() {
   const fullName = document.getElementById('fullName').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const city = document.getElementById('city').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const cardName = document.getElementById('cardName').value.trim();
   const cardNumber = document.getElementById('cardNumber').value.trim();
 
   document.getElementById('reviewName').textContent = fullName || '—';
-  document.getElementById('reviewAddress').textContent = [address, city].filter(Boolean).join(', ') || '—';
   document.getElementById('reviewPhone').textContent = phone || '—';
+
+  if (deliveryMethod === 'retiro') {
+    const point = PICKUP_POINTS.find(p => p.id === selectedPickupPointId);
+    document.getElementById('reviewDeliveryHeading').textContent = 'Retiro en punto de despacho';
+    document.getElementById('reviewAddressLabel').textContent = 'Punto de retiro';
+    document.getElementById('reviewAddress').textContent = point ? `${point.name} — ${point.address}` : '—';
+  } else {
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    document.getElementById('reviewDeliveryHeading').textContent = 'Dirección de envío';
+    document.getElementById('reviewAddressLabel').textContent = 'Dirección';
+    document.getElementById('reviewAddress').textContent = [address, city].filter(Boolean).join(', ') || '—';
+  }
 
   const last4 = cardNumber.replace(/\s/g, '').slice(-4);
   document.getElementById('reviewCard').textContent = cardNumber
     ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}`
     : '—';
 }
+
+// ---------------------------------------------------------------------------
+// Forma de entrega: envío a domicilio vs. retiro en punto de despacho
+// ---------------------------------------------------------------------------
+function renderPickupList() {
+  const container = document.getElementById('pickupList');
+  container.innerHTML = PICKUP_POINTS.map(pt => `
+    <label class="option-card" data-pickup-id="${pt.id}">
+      <input type="radio" name="pickupPoint" value="${pt.id}" ${pt.id === selectedPickupPointId ? 'checked' : ''}>
+      <span class="option-radio-dot"></span>
+      <span class="option-body">
+        <span class="option-title">${pt.name}</span>
+        <span class="option-meta">${pt.address} · ${pt.hours}</span>
+      </span>
+    </label>
+  `).join('');
+
+  container.querySelectorAll('input[name="pickupPoint"]').forEach(input => {
+    input.addEventListener('change', () => {
+      selectedPickupPointId = input.value;
+      updateOptionCardSelection();
+    });
+  });
+}
+
+function updateOptionCardSelection() {
+  document.querySelectorAll('.option-card').forEach(card => {
+    const input = card.querySelector('input[type="radio"]');
+    card.classList.toggle('is-selected', input.checked);
+  });
+}
+
+function renderDeliveryMethodMeta() {
+  document.getElementById('metaEnvio').textContent = getDeliveryEstimateText();
+  document.getElementById('priceEnvio').textContent = formatCLP(SHIPPING_COST);
+  document.getElementById('metaRetiro').textContent = getPickupEstimateText();
+}
+
+function toggleDeliveryDetailBlocks() {
+  document.getElementById('envioAddressBlock').classList.toggle('hidden', deliveryMethod !== 'envio');
+  document.getElementById('retiroPointBlock').classList.toggle('hidden', deliveryMethod !== 'retiro');
+}
+
+document.querySelectorAll('input[name="deliveryMethod"]').forEach(input => {
+  input.addEventListener('change', () => {
+    deliveryMethod = input.value;
+    logEvent('click', { button: 'forma_de_entrega', value: deliveryMethod });
+    updateOptionCardSelection();
+    toggleDeliveryDetailBlocks();
+    renderSummary();
+  });
+});
 
 // ---------------------------------------------------------------------------
 // Render carrito
@@ -215,15 +298,17 @@ function renderProductList() {
 
 function renderSummary() {
   const subtotal = getSubtotal();
-  const total = getTotal();
 
+  // El carrito siempre muestra la estimación base de envío a domicilio
+  // (la forma de entrega recién se elige dentro del checkout).
   document.getElementById('subtotalValue').textContent = formatCLP(subtotal);
-  document.getElementById('shippingValue').textContent = formatCLP(SHIPPING_COST);
-  document.getElementById('totalValue').textContent = formatCLP(total);
+  document.getElementById('shippingValue').textContent = formatShipping(SHIPPING_COST);
+  document.getElementById('totalValue').textContent = formatCLP(subtotal + SHIPPING_COST);
 
+  const checkoutShipping = getShippingCost();
   document.getElementById('subtotalValue2').textContent = formatCLP(subtotal);
-  document.getElementById('shippingValue2').textContent = formatCLP(SHIPPING_COST);
-  document.getElementById('totalValue2').textContent = formatCLP(total);
+  document.getElementById('shippingValue2').textContent = formatShipping(checkoutShipping);
+  document.getElementById('totalValue2').textContent = formatCLP(subtotal + checkoutShipping);
 
   const itemCount = PRODUCTS.reduce((sum, p) => sum + p.qty, 0);
   document.getElementById('cartIndicator').textContent = `Carrito (${itemCount})`;
@@ -259,13 +344,22 @@ document.getElementById('btnStepPrimary').addEventListener('click', () => {
   const orderNumber = 'N°' + Math.floor(100000 + Math.random() * 900000);
   document.getElementById('orderNumber').textContent = `Pedido ${orderNumber}`;
   document.getElementById('totalValue3').textContent = formatCLP(getTotal());
-  document.getElementById('deliveryValue3').textContent = getDeliveryEstimateText().replace('Llega ', '');
-  const address = document.getElementById('address').value.trim();
-  const city = document.getElementById('city').value.trim();
-  document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
+
+  if (deliveryMethod === 'retiro') {
+    const point = PICKUP_POINTS.find(p => p.id === selectedPickupPointId);
+    document.getElementById('deliveryValue3').textContent = getPickupEstimateText().replace('Disponible ', '');
+    document.getElementById('addressLabel3').textContent = 'Punto de retiro';
+    document.getElementById('addressValue3').textContent = point ? `${point.name} — ${point.address}` : '—';
+  } else {
+    document.getElementById('deliveryValue3').textContent = getDeliveryEstimateText().replace('Llega ', '');
+    document.getElementById('addressLabel3').textContent = 'Dirección';
+    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('city').value.trim();
+    document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
+  }
 
   goToConfirmation();
-  logEvent('completed', { order: orderNumber });
+  logEvent('completed', { order: orderNumber, delivery_method: deliveryMethod });
 });
 
 document.getElementById('btnStepBack').addEventListener('click', () => {
@@ -284,6 +378,15 @@ document.getElementById('btnRestart').addEventListener('click', () => {
   ['fullName','address','city','zip','phone','cardName','cardNumber','cardExpiry','cardCvv'].forEach(id => {
     document.getElementById(id).value = '';
   });
+
+  deliveryMethod = 'envio';
+  selectedPickupPointId = PICKUP_POINTS[0].id;
+  document.getElementById('methodEnvio').checked = true;
+  document.getElementById('methodRetiro').checked = false;
+  updateOptionCardSelection();
+  toggleDeliveryDetailBlocks();
+  renderPickupList();
+
   renderAll();
   goToCart();
 });
@@ -332,4 +435,7 @@ document.getElementById('debugDownload').addEventListener('click', () => {
 // Init
 // ---------------------------------------------------------------------------
 renderAll();
+renderPickupList();
+renderDeliveryMethodMeta();
+updateOptionCardSelection();
 enterScreen('cart');
