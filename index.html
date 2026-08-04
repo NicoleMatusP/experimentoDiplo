@@ -3,342 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda</title>
+<title>Prototipos de checkout — Experimento</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="topbar">
   <div class="topbar-inner">
-    <span class="logo">Tienda</span>
-    <span class="cart-indicator">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span id="cartIndicator">Carrito (3)</span>
-    </span>
+    <span class="logo">Prototipos de checkout</span>
+    <span class="hub-subtitle">Experimento de conversión</span>
   </div>
 </header>
 
-<main id="app">
+<main class="page">
 
-  <!-- PANTALLA 1: CARRITO -->
-  <section class="screen" id="screen-cart" data-screen="cart">
-    <div class="page">
-      <h1 class="page-title">Tu carrito</h1>
+  <h1 class="page-title">Elegí una variante</h1>
+  <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
-      <div class="layout">
-        <div class="col-main">
-          <ul class="product-list" id="productList"></ul>
-        </div>
+  <div class="variant-list">
 
-        <aside class="col-side">
-          <div class="delivery-line">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-            <span id="deliveryLine"></span>
-          </div>
-
-          <div class="summary-box">
-            <h2 class="summary-title">Resumen del pedido</h2>
-            <div class="summary-row">
-              <span>Subtotal</span>
-              <span id="subtotalValue">$0</span>
-            </div>
-            <div class="summary-row">
-              <span>Envío</span>
-              <span id="shippingValue">$0</span>
-            </div>
-            <div class="summary-row summary-total">
-              <span>Total</span>
-              <span id="totalValue">$0</span>
-            </div>
-          </div>
-        </aside>
+    <a class="variant-card" href="variante-a-control/index.html">
+      <svg class="variant-mockup" viewBox="0 0 100 84" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="96" height="80" rx="8" fill="var(--gray-50)" stroke="var(--gray-200)"/>
+        <rect x="10" y="12" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="12" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="22" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="22" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="32" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="32" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <line x1="10" y1="40" x2="90" y2="40" stroke="var(--gray-200)"/>
+        <rect x="10" y="48" width="26" height="4" rx="2" fill="var(--gray-400)"/>
+        <circle cx="20" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="24" y1="74" x2="46" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="50" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="54" y1="74" x2="76" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="80" cy="74" r="4" fill="var(--gray-300)"/>
+      </svg>
+      <div class="variant-body">
+        <div class="variant-name">Variante A — Control</div>
+        <div class="variant-desc">Flujo de compra estándar, sin cambios adicionales.</div>
       </div>
-    </div>
+      <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
 
-    <div class="bottom-bar">
-      <div class="bottom-bar-inner">
-        <button class="btn btn-primary btn-block" id="btnGoCheckout">Continuar al pago</button>
+    <a class="variant-card" href="variante-b-costo-envio/index.html">
+      <svg class="variant-mockup" viewBox="0 0 100 84" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="96" height="80" rx="8" fill="var(--gray-50)" stroke="var(--gray-200)"/>
+        <rect x="10" y="12" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="12" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="22" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="22" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="32" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="32" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <line x1="10" y1="40" x2="90" y2="40" stroke="var(--gray-200)"/>
+        <rect x="10" y="46" width="26" height="3.5" rx="1.5" fill="var(--gray-400)"/>
+        <rect x="10" y="52" width="22" height="3.5" rx="1.5" fill="var(--gray-400)"/>
+        <rect x="10" y="58" width="30" height="3.5" rx="1.5" fill="var(--gray-600)"/>
+        <circle cx="20" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="24" y1="74" x2="46" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="50" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="54" y1="74" x2="76" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="80" cy="74" r="4" fill="var(--gray-300)"/>
+      </svg>
+      <div class="variant-body">
+        <div class="variant-name">Variante B — Costo con envío</div>
+        <div class="variant-desc">El carrito muestra el detalle de costos, incluido el envío, antes de continuar.</div>
       </div>
-    </div>
-  </section>
+      <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
 
-  <!-- PANTALLA 2: CHECKOUT (por etapas) -->
-  <section class="screen hidden" id="screen-checkout" data-screen="checkout">
-    <div class="page">
-      <h1 class="page-title">Pago</h1>
-
-      <ol class="progress-bar" id="progressBar">
-        <li class="progress-step" data-step="1">
-          <span class="progress-dot">1</span>
-          <span class="progress-label">Entrega</span>
-        </li>
-        <li class="progress-step" data-step="2">
-          <span class="progress-dot">2</span>
-          <span class="progress-label">Pago</span>
-        </li>
-        <li class="progress-step" data-step="3">
-          <span class="progress-dot">3</span>
-          <span class="progress-label">Revisión</span>
-        </li>
-      </ol>
-
-      <div class="layout">
-        <div class="col-main">
-
-          <!-- Etapa 1: Forma de entrega -->
-          <div class="checkout-step" id="step-entrega">
-            <div class="form-block">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                Forma de entrega
-              </h2>
-              <div class="option-list" id="deliveryOptions">
-                <label class="option-card" id="optionEnvio">
-                  <input type="radio" name="deliveryMethod" value="envio" id="methodEnvio" checked>
-                  <span class="option-radio-dot"></span>
-                  <span class="option-body">
-                    <span class="option-title">Envío a domicilio</span>
-                    <span class="option-meta" id="metaEnvio"></span>
-                  </span>
-                  <span class="option-price" id="priceEnvio"></span>
-                </label>
-                <label class="option-card" id="optionRetiro">
-                  <input type="radio" name="deliveryMethod" value="retiro" id="methodRetiro">
-                  <span class="option-radio-dot"></span>
-                  <span class="option-body">
-                    <span class="option-title">Retiro en punto de despacho</span>
-                    <span class="option-meta" id="metaRetiro"></span>
-                  </span>
-                  <span class="option-price">Gratis</span>
-                </label>
-              </div>
-            </div>
-
-            <div class="form-block" id="envioAddressBlock">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Dirección de envío
-              </h2>
-              <div class="field">
-                <label for="address">Dirección</label>
-                <input type="text" id="address" placeholder="Calle, número, depto.">
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label for="city">Ciudad</label>
-                  <input type="text" id="city" placeholder="Ciudad">
-                </div>
-                <div class="field">
-                  <label for="zip">Código postal</label>
-                  <input type="text" id="zip" placeholder="0000000">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-block hidden" id="retiroPointBlock">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                Punto de retiro
-              </h2>
-              <div class="option-list" id="pickupList"></div>
-            </div>
-
-            <div class="form-block">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path></svg>
-                Datos de contacto
-              </h2>
-              <div class="field">
-                <label for="fullName">Nombre completo</label>
-                <input type="text" id="fullName" placeholder="Nombre y apellido">
-              </div>
-              <div class="field">
-                <label for="phone">Teléfono</label>
-                <input type="tel" id="phone" placeholder="+56 9 0000 0000">
-              </div>
-            </div>
-          </div>
-
-          <!-- Etapa 2: Pago -->
-          <div class="checkout-step hidden" id="step-pago">
-            <div class="form-block">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                Medio de pago
-              </h2>
-              <div class="option-list" id="paymentOptions">
-                <label class="option-card" id="optionTarjeta">
-                  <input type="radio" name="paymentMethod" value="tarjeta" id="methodTarjeta" checked>
-                  <span class="option-radio-dot"></span>
-                  <span class="option-body">
-                    <span class="option-title">Tarjeta de crédito o débito</span>
-                    <span class="option-meta">Visa, Mastercard u otra</span>
-                  </span>
-                </label>
-                <label class="option-card" id="optionEfectivo">
-                  <input type="radio" name="paymentMethod" value="efectivo" id="methodEfectivo">
-                  <span class="option-radio-dot"></span>
-                  <span class="option-body">
-                    <span class="option-title">Efectivo</span>
-                    <span class="option-meta">Pagás al recibir o retirar tu pedido</span>
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            <div class="form-block" id="cardFieldsBlock">
-              <h2 class="form-heading">Datos de la tarjeta</h2>
-
-              <div id="savedCardView">
-                <div class="option-card is-selected">
-                  <span class="option-radio-dot"></span>
-                  <span class="option-body">
-                    <span class="option-title" id="savedCardTitle">Visa •••• 4242</span>
-                    <span class="option-meta" id="savedCardMeta">Nicole Matus · Vence 08/29</span>
-                  </span>
-                </div>
-                <button type="button" class="text-link" id="btnChangeCard">Usar otra tarjeta</button>
-              </div>
-
-              <div class="hidden" id="cardFormView">
-                <div class="field">
-                  <label for="cardName">Nombre en la tarjeta</label>
-                  <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
-                </div>
-                <div class="field">
-                  <label for="cardNumber">Número de tarjeta</label>
-                  <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
-                </div>
-                <div class="field-row">
-                  <div class="field">
-                    <label for="cardExpiry">Vencimiento</label>
-                    <input type="text" id="cardExpiry" placeholder="MM/AA">
-                  </div>
-                  <div class="field">
-                    <label for="cardCvv">CVV</label>
-                    <input type="text" id="cardCvv" placeholder="000">
-                  </div>
-                </div>
-                <button type="button" class="text-link" id="btnUseSavedCard">Usar tarjeta guardada</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Etapa 3: Revisión -->
-          <div class="checkout-step hidden" id="step-revision">
-            <div class="form-block">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span id="reviewDeliveryHeading">Dirección de envío</span>
-              </h2>
-              <div class="summary-row">
-                <span>Nombre</span>
-                <span id="reviewName">—</span>
-              </div>
-              <div class="summary-row">
-                <span id="reviewAddressLabel">Dirección</span>
-                <span id="reviewAddress">—</span>
-              </div>
-              <div class="summary-row">
-                <span>Teléfono</span>
-                <span id="reviewPhone">—</span>
-              </div>
-            </div>
-
-            <div class="form-block">
-              <h2 class="form-heading">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-                Medio de pago
-              </h2>
-              <div class="summary-row">
-                <span id="reviewCardLabel">Tarjeta</span>
-                <span id="reviewCard">—</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <aside class="col-side">
-          <div class="summary-box">
-            <h2 class="summary-title">Resumen del pedido</h2>
-            <div class="summary-row">
-              <span>Subtotal</span>
-              <span id="subtotalValue2">$0</span>
-            </div>
-            <div class="summary-row">
-              <span>Envío</span>
-              <span id="shippingValue2">$0</span>
-            </div>
-            <div class="summary-row summary-total">
-              <span>Total</span>
-              <span id="totalValue2">$0</span>
-            </div>
-          </div>
-        </aside>
+    <a class="variant-card" href="variante-c-fecha-entrega/index.html">
+      <svg class="variant-mockup" viewBox="0 0 100 84" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="96" height="80" rx="8" fill="var(--gray-50)" stroke="var(--gray-200)"/>
+        <rect x="10" y="12" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="12" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="22" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="22" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="32" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="32" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <line x1="10" y1="40" x2="90" y2="40" stroke="var(--gray-200)"/>
+        <rect x="10" y="47" width="11" height="7" rx="1" fill="var(--gray-400)"/>
+        <rect x="21" y="49" width="6" height="5" fill="var(--gray-400)"/>
+        <circle cx="13" cy="55" r="2" fill="var(--gray-500)"/>
+        <circle cx="24" cy="55" r="2" fill="var(--gray-500)"/>
+        <rect x="34" y="49" width="28" height="4" rx="2" fill="var(--gray-400)"/>
+        <circle cx="20" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="24" y1="74" x2="46" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="50" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="54" y1="74" x2="76" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="80" cy="74" r="4" fill="var(--gray-300)"/>
+      </svg>
+      <div class="variant-body">
+        <div class="variant-name">Variante C — Fecha de entrega</div>
+        <div class="variant-desc">El carrito muestra una fecha estimada de entrega.</div>
       </div>
-    </div>
+      <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
 
-    <div class="bottom-bar">
-      <div class="bottom-bar-inner bottom-bar-split">
-        <button class="btn btn-link" id="btnStepBack">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-          <span id="btnStepBackLabel">Volver al carrito</span>
-        </button>
-        <button class="btn btn-primary" id="btnStepPrimary">Continuar</button>
+    <a class="variant-card" href="variante-d-checkout-simple/index.html">
+      <svg class="variant-mockup" viewBox="0 0 100 84" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="96" height="80" rx="8" fill="var(--gray-50)" stroke="var(--gray-200)"/>
+        <rect x="10" y="12" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="12" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="22" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="22" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="32" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="32" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <line x1="10" y1="40" x2="90" y2="40" stroke="var(--gray-200)"/>
+        <rect x="10" y="48" width="26" height="4" rx="2" fill="var(--gray-400)"/>
+        <rect x="15" y="70" width="70" height="7" rx="3.5" fill="var(--gray-400)"/>
+      </svg>
+      <div class="variant-body">
+        <div class="variant-name">Variante D — Pago simplificado</div>
+        <div class="variant-desc">El proceso de pago se completa en menos pasos.</div>
       </div>
-    </div>
-  </section>
+      <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
 
-  <!-- PANTALLA 3: CONFIRMACIÓN -->
-  <section class="screen hidden" id="screen-confirmation" data-screen="confirmation">
-    <div class="page page-narrow">
-      <div class="confirm-box">
-        <svg class="icon icon-lg confirm-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <h1 class="page-title">Compra confirmada</h1>
-        <p class="confirm-order-number" id="orderNumber"></p>
-
-        <div class="confirm-detail">
-          <div class="summary-row">
-            <span>Total pagado</span>
-            <span id="totalValue3">$0</span>
-          </div>
-          <div class="summary-row">
-            <span>Entrega estimada</span>
-            <span id="deliveryValue3"></span>
-          </div>
-          <div class="summary-row">
-            <span id="addressLabel3">Dirección</span>
-            <span id="addressValue3"></span>
-          </div>
-          <div class="summary-row">
-            <span>Medio de pago</span>
-            <span id="paymentValue3"></span>
-          </div>
-        </div>
+    <a class="variant-card" href="variante-e-completa/index.html">
+      <svg class="variant-mockup" viewBox="0 0 100 84" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="96" height="80" rx="8" fill="var(--gray-50)" stroke="var(--gray-200)"/>
+        <rect x="10" y="10" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="10" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="10" y="18" width="48" height="4" rx="2" fill="var(--gray-300)"/>
+        <rect x="72" y="18" width="16" height="4" rx="2" fill="var(--gray-300)"/>
+        <line x1="10" y1="26" x2="90" y2="26" stroke="var(--gray-200)"/>
+        <rect x="10" y="31" width="10" height="6" rx="1" fill="var(--gray-400)"/>
+        <rect x="20" y="33" width="5" height="4" fill="var(--gray-400)"/>
+        <circle cx="12" cy="38" r="1.6" fill="var(--gray-500)"/>
+        <circle cx="22" cy="38" r="1.6" fill="var(--gray-500)"/>
+        <rect x="30" y="33" width="24" height="3.5" rx="1.5" fill="var(--gray-400)"/>
+        <rect x="10" y="44" width="24" height="3.5" rx="1.5" fill="var(--gray-400)"/>
+        <rect x="10" y="50" width="20" height="3.5" rx="1.5" fill="var(--gray-400)"/>
+        <rect x="10" y="56" width="28" height="3.5" rx="1.5" fill="var(--gray-600)"/>
+        <circle cx="20" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="24" y1="74" x2="46" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="50" cy="74" r="4" fill="var(--gray-300)"/>
+        <line x1="54" y1="74" x2="76" y2="74" stroke="var(--gray-300)"/>
+        <circle cx="80" cy="74" r="4" fill="var(--gray-300)"/>
+      </svg>
+      <div class="variant-body">
+        <div class="variant-name">Variante E — Completa</div>
+        <div class="variant-desc">Incluye detalle de costos, fecha estimada de entrega y un proceso de pago más simple.</div>
       </div>
-    </div>
+      <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
 
-    <div class="bottom-bar">
-      <div class="bottom-bar-inner">
-        <button class="btn btn-primary btn-block" id="btnRestart">Volver al inicio</button>
-      </div>
-    </div>
-  </section>
+  </div>
+
+  <button class="factsheet-toggle" id="btnToggleFactsheet" aria-expanded="false">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+    <span id="factsheetToggleLabel">Ver ficha del experimento</span>
+  </button>
+
+  <div class="factsheet hidden" id="factsheet">
+    <h2 class="factsheet-heading">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      Ficha del experimento
+    </h2>
+    <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
+    <table class="factsheet-table">
+      <tr><td>Conversión base actual</td><td>36%</td></tr>
+      <tr><td>Conversión mínima a detectar</td><td>40%</td></tr>
+      <tr><td>Nivel de confianza ajustado (Bonferroni, 4 comparaciones vs. control)</td><td>98.75%</td></tr>
+      <tr><td>Poder estadístico</td><td>80%</td></tr>
+      <tr><td>Muestra mínima por variante</td><td>~2.400 – 2.600 usuarios</td></tr>
+      <tr><td>Muestra total estimada (5 variantes)</td><td>~12.000 – 13.000 usuarios</td></tr>
+      <tr><td>Duración sugerida</td><td>1–2 ciclos semanales (7–14 días)</td></tr>
+    </table>
+  </div>
 
 </main>
-
-<!-- Panel de depuración oculto: Alt+Shift+L -->
-<div class="debug-panel hidden" id="debugPanel">
-  <div class="debug-header">
-    <span>Debug log</span>
-    <div>
-      <button id="debugDownload">Descargar JSON</button>
-      <button id="debugClose">Cerrar</button>
-    </div>
-  </div>
-  <pre id="debugContent"></pre>
-</div>
 
 <script src="app.js"></script>
 </body>
