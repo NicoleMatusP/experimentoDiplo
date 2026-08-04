@@ -25,17 +25,61 @@ html, body {
 body {
   overflow: hidden;
   background: var(--gray-50);
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden { display: none !important; }
 
 /* ---------------------------------------------------------------------
+   Barra superior persistente — identifica el experimento y permite
+   volver al hub. Se mantiene siempre visible, incluso dentro de cada
+   prototipo (no forma parte del "marco" ni de su scroll interno).
+--------------------------------------------------------------------- */
+.site-topbar {
+  flex: 0 0 auto;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+}
+.site-topbar-inner {
+  width: 100%;
+  padding: 0 16px;
+}
+.site-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--gray-800);
+}
+.site-topbar-brand .icon { color: var(--gray-400); flex-shrink: 0; }
+.site-topbar-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.site-topbar-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gray-900);
+}
+.site-topbar-subtitle {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+/* ---------------------------------------------------------------------
    Marco de dispositivo — el prototipo está pensado para mobile, así que
-   en pantallas angostas ocupa todo el viewport (como una app real) y en
-   pantallas más anchas se muestra dentro de un marco tipo teléfono.
+   en pantallas angostas ocupa todo el espacio bajo la barra superior
+   (como una app real) y en pantallas más anchas se muestra dentro de
+   un marco tipo teléfono.
 --------------------------------------------------------------------- */
 .device-frame {
-  min-height: 100dvh;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +87,7 @@ body {
 .device-screen {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -51,46 +95,26 @@ body {
   transform: translateZ(0);
 }
 
-/* Enlace para volver al hub: dentro del topbar en mobile, fuera del
-   marco (a la izquierda) cuando el prototipo se muestra enmarcado. */
-.device-back-link {
-  display: none;
-}
-
 @media (min-width: 480px) {
   body {
     background: var(--gray-300);
-    overflow: auto;
   }
   .device-frame {
     align-items: flex-start;
     justify-content: center;
-    gap: 20px;
+    overflow: auto;
     padding: 40px 0;
   }
   .device-screen {
     width: 390px;
     height: 844px;
-    max-height: calc(100dvh - 80px);
+    max-height: calc(100dvh - 132px);
     border-radius: 40px;
     box-shadow:
       0 0 0 10px #1c1c1e,
       0 0 0 12px #050505,
       0 30px 60px rgba(0, 0, 0, 0.35);
   }
-
-  .device-back-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 44px;
-    color: var(--gray-600);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .device-back-link:hover { color: var(--gray-900); }
 }
 
 .icon {
@@ -116,17 +140,6 @@ body {
   align-items: center;
   padding: 14px 16px;
 }
-.topbar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.hub-link {
-  font-size: 13px;
-  color: var(--gray-500);
-  text-decoration: none;
-}
-.hub-link:hover { color: var(--gray-800); }
 .logo {
   font-weight: 700;
   font-size: 17px;
@@ -518,7 +531,6 @@ body {
    componentes ya definidos arriba).
 --------------------------------------------------------------------- */
 @media (min-width: 480px) {
-  .topbar-left .hub-link { display: none; }
   .topbar { top: 20px; }
   .bottom-bar { bottom: 20px; }
   .page { padding-bottom: 120px; }

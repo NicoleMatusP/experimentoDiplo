@@ -25,17 +25,61 @@ html, body {
 body {
   overflow: hidden;
   background: var(--gray-50);
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden { display: none !important; }
 
 /* ---------------------------------------------------------------------
+   Barra superior persistente — identifica el experimento y permite
+   volver al hub. Se mantiene siempre visible, incluso dentro de cada
+   prototipo (no forma parte del "marco" ni de su scroll interno).
+--------------------------------------------------------------------- */
+.site-topbar {
+  flex: 0 0 auto;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+}
+.site-topbar-inner {
+  width: 100%;
+  padding: 0 16px;
+}
+.site-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--gray-800);
+}
+.site-topbar-brand .icon { color: var(--gray-400); flex-shrink: 0; }
+.site-topbar-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.site-topbar-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gray-900);
+}
+.site-topbar-subtitle {
+  font-size: 11px;
+  color: var(--gray-500);
+}
+
+/* ---------------------------------------------------------------------
    Marco de dispositivo — el prototipo está pensado para mobile, así que
-   en pantallas angostas ocupa todo el viewport (como una app real) y en
-   pantallas más anchas se muestra dentro de un marco tipo teléfono.
+   en pantallas angostas ocupa todo el espacio bajo la barra superior
+   (como una app real) y en pantallas más anchas se muestra dentro de
+   un marco tipo teléfono.
 --------------------------------------------------------------------- */
 .device-frame {
-  min-height: 100dvh;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +87,7 @@ body {
 .device-screen {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -54,15 +98,17 @@ body {
 @media (min-width: 480px) {
   body {
     background: var(--gray-300);
-    overflow: auto;
   }
   .device-frame {
+    align-items: flex-start;
+    justify-content: center;
+    overflow: auto;
     padding: 40px 0;
   }
   .device-screen {
     width: 390px;
     height: 844px;
-    max-height: calc(100dvh - 80px);
+    max-height: calc(100dvh - 132px);
     border-radius: 40px;
     box-shadow:
       0 0 0 10px #1c1c1e,
