@@ -254,6 +254,7 @@ function renderPickupList() {
 function updateOptionCardSelection() {
   document.querySelectorAll('.option-card').forEach(card => {
     const input = card.querySelector('input[type="radio"]');
+    if (!input) return;
     card.classList.toggle('is-selected', input.checked);
   });
 }
@@ -414,6 +415,8 @@ document.getElementById('btnStepPrimary').addEventListener('click', () => {
   document.getElementById('paymentValue3').textContent = paymentMethod === 'tarjeta'
     ? getCardDisplayText()
     : PAYMENT_LABELS[paymentMethod];
+
+  document.getElementById('cartIndicator').textContent = 'Carrito (0)';
 
   goToConfirmation();
   logEvent('completed', { order: orderNumber, delivery_method: deliveryMethod, payment_method: paymentMethod });
