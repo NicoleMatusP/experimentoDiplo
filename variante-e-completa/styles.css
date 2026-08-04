@@ -88,9 +88,9 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: var(--gray-50);
   transform: translateZ(0);
 }
@@ -133,12 +133,28 @@ body {
 .icon-lg { width: 40px; height: 40px; }
 
 .topbar {
+  flex: 0 0 auto;
   background: #fff;
   border-bottom: 1px solid var(--gray-200);
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
+
+/* main#app y la pantalla activa forman una columna flex: el header ya
+   quedó fijo arriba (flex item normal), y acá se reparte el resto del
+   alto entre el contenido scrolleable (.page) y la barra inferior fija
+   (.bottom-bar), que también es un simple flex item, ya no position:fixed. */
+main#app {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.screen {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .topbar-inner {
   max-width: 1040px;
   margin: 0 auto;
@@ -161,9 +177,14 @@ body {
 }
 
 .page {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   max-width: 1040px;
   margin: 0 auto;
-  padding: 20px 16px 100px;
+  padding: 20px 16px 24px;
+  width: 100%;
 }
 .page-narrow {
   max-width: 560px;
@@ -182,16 +203,13 @@ body {
   gap: 20px;
 }
 
-/* Barra de acciones fija — al alcance del pulgar en cualquier pantalla */
+/* Barra de acciones — flex item fijo al final de la columna, nunca se
+   mueve con el scroll de .page (que es el único elemento scrolleable). */
 .bottom-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  flex: 0 0 auto;
   background: #fff;
   border-top: 1px solid var(--gray-200);
   padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  z-index: 20;
 }
 .bottom-bar-inner {
   max-width: 1040px;
@@ -629,13 +647,11 @@ body {
 }
 
 /* ---------------------------------------------------------------------
-   Ajustes cuando el prototipo se ve enmarcado (más abajo en el cascade
-   a propósito, para poder sobrescribir el top/bottom de estos
-   componentes ya definidos arriba).
+   Ajustes cuando el prototipo se ve enmarcado: un poco de aire entre el
+   header/la barra de acciones y el borde redondeado del "teléfono".
 --------------------------------------------------------------------- */
 @media (min-width: 480px) {
-  .topbar { top: 20px; }
-  .bottom-bar { bottom: 20px; }
-  .page { padding-bottom: 120px; }
+  .topbar { margin-top: 20px; }
+  .bottom-bar { margin-bottom: 20px; }
 }
 

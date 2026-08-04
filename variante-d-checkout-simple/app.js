@@ -105,8 +105,8 @@ function enterScreen(name) {
 // Navegación entre pantallas (sin etapas: el pago es una sola pantalla)
 // ---------------------------------------------------------------------------
 function scrollScreenTop() {
-  const screen = document.getElementById('deviceScreen');
-  if (screen) screen.scrollTop = 0;
+  const page = document.querySelector('.screen:not(.hidden) .page');
+  if (page) page.scrollTop = 0;
 }
 
 function showTopScreen(id) {
