@@ -98,11 +98,82 @@ function enterScreen(name) {
 // ---------------------------------------------------------------------------
 // Navegación entre pantallas
 // ---------------------------------------------------------------------------
-function showScreen(id, name) {
+function showTopScreen(id) {
   document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   window.scrollTo(0, 0);
-  enterScreen(name);
+}
+
+function goToCart() {
+  showTopScreen('screen-cart');
+  enterScreen('cart');
+}
+
+function goToConfirmation() {
+  showTopScreen('screen-confirmation');
+  enterScreen('confirmation');
+}
+
+// ---------------------------------------------------------------------------
+// Checkout por etapas
+// ---------------------------------------------------------------------------
+const CHECKOUT_STEPS = [
+  { id: 'step-direccion', screenName: 'checkout_direccion' },
+  { id: 'step-pago', screenName: 'checkout_pago' },
+  { id: 'step-revision', screenName: 'checkout_revision' },
+];
+
+let currentCheckoutStep = 1;
+
+function enterCheckout() {
+  showTopScreen('screen-checkout');
+  goToCheckoutStep(1);
+}
+
+function goToCheckoutStep(stepNumber) {
+  currentCheckoutStep = stepNumber;
+  document.querySelectorAll('.checkout-step').forEach(el => el.classList.add('hidden'));
+  const step = CHECKOUT_STEPS[stepNumber - 1];
+  document.getElementById(step.id).classList.remove('hidden');
+
+  updateProgressBar(stepNumber);
+  updateStepButtons(stepNumber);
+  if (stepNumber === 3) fillReview();
+
+  window.scrollTo(0, 0);
+  enterScreen(step.screenName);
+}
+
+function updateProgressBar(stepNumber) {
+  document.querySelectorAll('.progress-step').forEach(li => {
+    const n = Number(li.dataset.step);
+    li.classList.remove('is-active', 'is-done');
+    if (n < stepNumber) li.classList.add('is-done');
+    if (n === stepNumber) li.classList.add('is-active');
+  });
+}
+
+function updateStepButtons(stepNumber) {
+  document.getElementById('btnStepPrimary').textContent = stepNumber === 3 ? 'Confirmar compra' : 'Continuar';
+  document.getElementById('btnStepBackLabel').textContent = stepNumber === 1 ? 'Volver al carrito' : 'Atrás';
+}
+
+function fillReview() {
+  const fullName = document.getElementById('fullName').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const city = document.getElementById('city').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const cardName = document.getElementById('cardName').value.trim();
+  const cardNumber = document.getElementById('cardNumber').value.trim();
+
+  document.getElementById('reviewName').textContent = fullName || '—';
+  document.getElementById('reviewAddress').textContent = [address, city].filter(Boolean).join(', ') || '—';
+  document.getElementById('reviewPhone').textContent = phone || '—';
+
+  const last4 = cardNumber.replace(/\s/g, '').slice(-4);
+  document.getElementById('reviewCard').textContent = cardNumber
+    ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}`
+    : '—';
 }
 
 // ---------------------------------------------------------------------------
@@ -173,16 +244,17 @@ function renderAll() {
 // ---------------------------------------------------------------------------
 document.getElementById('btnGoCheckout').addEventListener('click', () => {
   logEvent('click', { button: 'continuar_al_pago', screen: 'cart' });
-  showScreen('screen-checkout', 'checkout');
+  enterCheckout();
 });
 
-document.getElementById('btnBackToCart').addEventListener('click', () => {
-  logEvent('click', { button: 'volver_al_carrito', screen: 'checkout' });
-  showScreen('screen-cart', 'cart');
-});
+document.getElementById('btnStepPrimary').addEventListener('click', () => {
+  if (currentCheckoutStep < CHECKOUT_STEPS.length) {
+    logEvent('click', { button: 'continuar', step: currentCheckoutStep });
+    goToCheckoutStep(currentCheckoutStep + 1);
+    return;
+  }
 
-document.getElementById('btnConfirm').addEventListener('click', () => {
-  logEvent('click', { button: 'confirmar_compra', screen: 'checkout' });
+  logEvent('click', { button: 'confirmar_compra', step: currentCheckoutStep });
 
   const orderNumber = 'N°' + Math.floor(100000 + Math.random() * 900000);
   document.getElementById('orderNumber').textContent = `Pedido ${orderNumber}`;
@@ -192,8 +264,18 @@ document.getElementById('btnConfirm').addEventListener('click', () => {
   const city = document.getElementById('city').value.trim();
   document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
 
-  showScreen('screen-confirmation', 'confirmation');
+  goToConfirmation();
   logEvent('completed', { order: orderNumber });
+});
+
+document.getElementById('btnStepBack').addEventListener('click', () => {
+  if (currentCheckoutStep === 1) {
+    logEvent('click', { button: 'volver_al_carrito', step: 1 });
+    goToCart();
+    return;
+  }
+  logEvent('click', { button: 'atras', step: currentCheckoutStep });
+  goToCheckoutStep(currentCheckoutStep - 1);
 });
 
 document.getElementById('btnRestart').addEventListener('click', () => {
@@ -203,7 +285,7 @@ document.getElementById('btnRestart').addEventListener('click', () => {
     document.getElementById(id).value = '';
   });
   renderAll();
-  showScreen('screen-cart', 'cart');
+  goToCart();
 });
 
 // ---------------------------------------------------------------------------

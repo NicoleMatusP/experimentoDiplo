@@ -51,73 +51,133 @@
               <span id="totalValue">$0</span>
             </div>
           </div>
-
-          <button class="btn btn-primary btn-block" id="btnGoCheckout">Continuar al pago</button>
         </aside>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-bar-inner">
+        <button class="btn btn-primary btn-block" id="btnGoCheckout">Continuar al pago</button>
       </div>
     </div>
   </section>
 
-  <!-- PANTALLA 2: CHECKOUT -->
+  <!-- PANTALLA 2: CHECKOUT (por etapas) -->
   <section class="screen hidden" id="screen-checkout" data-screen="checkout">
     <div class="page">
       <h1 class="page-title">Pago</h1>
 
+      <ol class="progress-bar" id="progressBar">
+        <li class="progress-step" data-step="1">
+          <span class="progress-dot">1</span>
+          <span class="progress-label">Dirección</span>
+        </li>
+        <li class="progress-step" data-step="2">
+          <span class="progress-dot">2</span>
+          <span class="progress-label">Pago</span>
+        </li>
+        <li class="progress-step" data-step="3">
+          <span class="progress-dot">3</span>
+          <span class="progress-label">Revisión</span>
+        </li>
+      </ol>
+
       <div class="layout">
         <div class="col-main">
-          <div class="form-block">
-            <h2 class="form-heading">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              Dirección de envío
-            </h2>
-            <div class="field">
-              <label for="fullName">Nombre completo</label>
-              <input type="text" id="fullName" placeholder="Nombre y apellido">
-            </div>
-            <div class="field">
-              <label for="address">Dirección</label>
-              <input type="text" id="address" placeholder="Calle, número, depto.">
-            </div>
-            <div class="field-row">
+
+          <!-- Etapa 1: Dirección -->
+          <div class="checkout-step" id="step-direccion">
+            <div class="form-block">
+              <h2 class="form-heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Dirección de envío
+              </h2>
               <div class="field">
-                <label for="city">Ciudad</label>
-                <input type="text" id="city" placeholder="Ciudad">
+                <label for="fullName">Nombre completo</label>
+                <input type="text" id="fullName" placeholder="Nombre y apellido">
               </div>
               <div class="field">
-                <label for="zip">Código postal</label>
-                <input type="text" id="zip" placeholder="0000000">
+                <label for="address">Dirección</label>
+                <input type="text" id="address" placeholder="Calle, número, depto.">
               </div>
-            </div>
-            <div class="field">
-              <label for="phone">Teléfono</label>
-              <input type="tel" id="phone" placeholder="+56 9 0000 0000">
+              <div class="field-row">
+                <div class="field">
+                  <label for="city">Ciudad</label>
+                  <input type="text" id="city" placeholder="Ciudad">
+                </div>
+                <div class="field">
+                  <label for="zip">Código postal</label>
+                  <input type="text" id="zip" placeholder="0000000">
+                </div>
+              </div>
+              <div class="field">
+                <label for="phone">Teléfono</label>
+                <input type="tel" id="phone" placeholder="+56 9 0000 0000">
+              </div>
             </div>
           </div>
 
-          <div class="form-block">
-            <h2 class="form-heading">
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-              Medio de pago
-            </h2>
-            <div class="field">
-              <label for="cardName">Nombre en la tarjeta</label>
-              <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
-            </div>
-            <div class="field">
-              <label for="cardNumber">Número de tarjeta</label>
-              <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
-            </div>
-            <div class="field-row">
+          <!-- Etapa 2: Pago -->
+          <div class="checkout-step hidden" id="step-pago">
+            <div class="form-block">
+              <h2 class="form-heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Medio de pago
+              </h2>
               <div class="field">
-                <label for="cardExpiry">Vencimiento</label>
-                <input type="text" id="cardExpiry" placeholder="MM/AA">
+                <label for="cardName">Nombre en la tarjeta</label>
+                <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
               </div>
               <div class="field">
-                <label for="cardCvv">CVV</label>
-                <input type="text" id="cardCvv" placeholder="000">
+                <label for="cardNumber">Número de tarjeta</label>
+                <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="cardExpiry">Vencimiento</label>
+                  <input type="text" id="cardExpiry" placeholder="MM/AA">
+                </div>
+                <div class="field">
+                  <label for="cardCvv">CVV</label>
+                  <input type="text" id="cardCvv" placeholder="000">
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Etapa 3: Revisión -->
+          <div class="checkout-step hidden" id="step-revision">
+            <div class="form-block">
+              <h2 class="form-heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Dirección de envío
+              </h2>
+              <div class="summary-row">
+                <span>Nombre</span>
+                <span id="reviewName">—</span>
+              </div>
+              <div class="summary-row">
+                <span>Dirección</span>
+                <span id="reviewAddress">—</span>
+              </div>
+              <div class="summary-row">
+                <span>Teléfono</span>
+                <span id="reviewPhone">—</span>
+              </div>
+            </div>
+
+            <div class="form-block">
+              <h2 class="form-heading">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Medio de pago
+              </h2>
+              <div class="summary-row">
+                <span>Tarjeta</span>
+                <span id="reviewCard">—</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <aside class="col-side">
@@ -136,13 +196,17 @@
               <span id="totalValue2">$0</span>
             </div>
           </div>
-
-          <button class="btn btn-primary btn-block" id="btnConfirm">Confirmar compra</button>
-          <button class="btn btn-link btn-block" id="btnBackToCart">
-            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Volver al carrito
-          </button>
         </aside>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="bottom-bar-inner bottom-bar-split">
+        <button class="btn btn-link" id="btnStepBack">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span id="btnStepBackLabel">Volver al carrito</span>
+        </button>
+        <button class="btn btn-primary" id="btnStepPrimary">Continuar</button>
       </div>
     </div>
   </section>
@@ -169,7 +233,11 @@
             <span id="addressValue3"></span>
           </div>
         </div>
+      </div>
+    </div>
 
+    <div class="bottom-bar">
+      <div class="bottom-bar-inner">
         <button class="btn btn-primary btn-block" id="btnRestart">Volver al inicio</button>
       </div>
     </div>

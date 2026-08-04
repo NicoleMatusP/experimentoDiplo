@@ -71,7 +71,7 @@ html, body {
 .page {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 20px 16px 48px;
+  padding: 20px 16px 100px;
 }
 .page-narrow {
   max-width: 560px;
@@ -88,6 +88,99 @@ html, body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+}
+
+/* Barra de acciones fija — al alcance del pulgar en cualquier pantalla */
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid var(--gray-200);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  z-index: 20;
+}
+.bottom-bar-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bottom-bar-inner .btn-primary {
+  flex: 1;
+}
+.bottom-bar-split .btn-link {
+  flex: 0 0 auto;
+  margin-top: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.page-narrow + .bottom-bar .bottom-bar-inner {
+  max-width: 560px;
+}
+
+/* Barra de progreso del checkout */
+.progress-bar {
+  display: flex;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+.progress-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.progress-step::before {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--gray-200);
+  z-index: 0;
+}
+.progress-step:first-child::before { display: none; }
+.progress-step.is-done::before,
+.progress-step.is-active::before {
+  background: var(--accent);
+}
+.progress-dot {
+  position: relative;
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--gray-200);
+  color: var(--gray-600);
+}
+.progress-step.is-active .progress-dot {
+  background: var(--accent);
+  color: #fff;
+}
+.progress-step.is-done .progress-dot {
+  background: var(--accent);
+  color: #fff;
+}
+.progress-label {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--gray-500);
+}
+.progress-step.is-active .progress-label {
+  color: var(--gray-900);
+  font-weight: 600;
 }
 
 /* Cart product list */
@@ -369,8 +462,16 @@ html, body {
   .logo { font-size: 18px; }
   .cart-indicator { font-size: 14px; }
 
-  .page { padding: 32px 24px 64px; }
+  .page { padding: 32px 24px 110px; }
   .page-title { font-size: 22px; margin-bottom: 24px; }
+
+  .bottom-bar { padding: 16px 24px calc(16px + env(safe-area-inset-bottom)); }
+  .bottom-bar-inner { justify-content: flex-end; }
+  .bottom-bar-inner .btn-primary { flex: 0 0 auto; min-width: 220px; width: auto; }
+
+  .progress-bar { max-width: 420px; margin-bottom: 32px; }
+  .progress-dot { width: 30px; height: 30px; font-size: 13px; }
+  .progress-label { font-size: 12px; }
 
   .layout {
     grid-template-columns: 1fr 340px;
