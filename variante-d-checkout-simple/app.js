@@ -104,10 +104,15 @@ function enterScreen(name) {
 // ---------------------------------------------------------------------------
 // Navegación entre pantallas (sin etapas: el pago es una sola pantalla)
 // ---------------------------------------------------------------------------
+function scrollScreenTop() {
+  const screen = document.getElementById('deviceScreen');
+  if (screen) screen.scrollTop = 0;
+}
+
 function showTopScreen(id) {
   document.querySelectorAll('.screen').forEach(el => el.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
-  window.scrollTo(0, 0);
+  scrollScreenTop();
 }
 
 function goToCart() {

@@ -20,6 +20,7 @@
   <h1 class="page-title">Elegí una variante</h1>
   <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
+  <div class="hub-layout">
   <div class="variant-list">
 
     <a class="variant-card" href="variante-a-control/index.html">
@@ -151,26 +152,30 @@
 
   </div>
 
-  <button class="factsheet-toggle" id="btnToggleFactsheet" aria-expanded="false">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-    <span id="factsheetToggleLabel">Ver ficha del experimento</span>
-  </button>
-
-  <div class="factsheet hidden" id="factsheet">
-    <h2 class="factsheet-heading">
+  <aside class="factsheet-panel">
+    <button class="factsheet-toggle" id="btnToggleFactsheet" aria-expanded="false">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      Ficha del experimento
-    </h2>
-    <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
-    <table class="factsheet-table">
-      <tr><td>Conversión base actual</td><td>36%</td></tr>
-      <tr><td>Conversión mínima a detectar</td><td>40%</td></tr>
-      <tr><td>Nivel de confianza ajustado (Bonferroni, 4 comparaciones vs. control)</td><td>98.75%</td></tr>
-      <tr><td>Poder estadístico</td><td>80%</td></tr>
-      <tr><td>Muestra mínima por variante</td><td>~2.400 – 2.600 usuarios</td></tr>
-      <tr><td>Muestra total estimada (5 variantes)</td><td>~12.000 – 13.000 usuarios</td></tr>
-      <tr><td>Duración sugerida</td><td>1–2 ciclos semanales (7–14 días)</td></tr>
-    </table>
+      <span id="factsheetToggleLabel">Ver ficha del experimento</span>
+    </button>
+
+    <div class="factsheet hidden" id="factsheet">
+      <h2 class="factsheet-heading">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        Ficha del experimento
+      </h2>
+      <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
+      <table class="factsheet-table">
+        <tr><td>Conversión base actual</td><td>36%</td></tr>
+        <tr><td>Conversión mínima a detectar</td><td>40%</td></tr>
+        <tr><td>Nivel de confianza ajustado (Bonferroni, 4 comparaciones vs. control)</td><td>98.75%</td></tr>
+        <tr><td>Poder estadístico</td><td>80%</td></tr>
+        <tr><td>Muestra mínima por variante</td><td>~2.400 – 2.600 usuarios</td></tr>
+        <tr><td>Muestra total estimada (5 variantes)</td><td>~12.000 – 13.000 usuarios</td></tr>
+        <tr><td>Duración sugerida</td><td>1–2 ciclos semanales (7–14 días)</td></tr>
+      </table>
+    </div>
+  </aside>
+
   </div>
 
 </main>

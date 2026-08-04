@@ -18,14 +18,80 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   color: var(--gray-800);
+}
+body {
+  overflow: hidden;
   background: var(--gray-50);
 }
 
 .hidden { display: none !important; }
 
-/* Solo mobile: ~375-414px. Sin breakpoints de escritorio. */
+/* ---------------------------------------------------------------------
+   Marco de dispositivo — el prototipo está pensado para mobile, así que
+   en pantallas angostas ocupa todo el viewport (como una app real) y en
+   pantallas más anchas se muestra dentro de un marco tipo teléfono.
+--------------------------------------------------------------------- */
+.device-frame {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.device-screen {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: var(--gray-50);
+  transform: translateZ(0);
+}
+
+/* Enlace para volver al hub: dentro del topbar en mobile, fuera del
+   marco (a la izquierda) cuando el prototipo se muestra enmarcado. */
+.device-back-link {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  body {
+    background: var(--gray-300);
+    overflow: auto;
+  }
+  .device-frame {
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 0;
+  }
+  .device-screen {
+    width: 390px;
+    height: 844px;
+    max-height: calc(100dvh - 80px);
+    border-radius: 40px;
+    box-shadow:
+      0 0 0 10px #1c1c1e,
+      0 0 0 12px #050505,
+      0 30px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .device-back-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 44px;
+    color: var(--gray-600);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .device-back-link:hover { color: var(--gray-900); }
+}
 
 .icon {
   width: 18px;
@@ -444,4 +510,16 @@ html, body {
   white-space: pre-wrap;
   word-break: break-word;
   flex: 1;
+}
+
+/* ---------------------------------------------------------------------
+   Ajustes cuando el prototipo se ve enmarcado (más abajo en el cascade
+   a propósito, para poder sobrescribir el top/bottom de estos
+   componentes ya definidos arriba).
+--------------------------------------------------------------------- */
+@media (min-width: 480px) {
+  .topbar-left .hub-link { display: none; }
+  .topbar { top: 20px; }
+  .bottom-bar { bottom: 20px; }
+  .page { padding-bottom: 120px; }
 }
