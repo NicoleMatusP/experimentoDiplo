@@ -1,13 +1,19 @@
 // ---------------------------------------------------------------------------
-// Hub de inicio — solo navegación a variantes + acordeón de la ficha técnica
+// Hub de inicio — navegación a variantes + acordeones de contexto,
+// metodología, métricas y diseño estadístico.
 // ---------------------------------------------------------------------------
-const btnToggle = document.getElementById('btnToggleFactsheet');
-const factsheet = document.getElementById('factsheet');
-const toggleLabel = document.getElementById('factsheetToggleLabel');
+document.querySelectorAll('.accordion-toggle').forEach(btn => {
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  const label = btn.querySelector('.accordion-toggle-label');
+  const showText = btn.dataset.showText;
+  const hideText = btn.dataset.hideText;
 
-btnToggle.addEventListener('click', () => {
-  const isHidden = factsheet.classList.contains('hidden');
-  factsheet.classList.toggle('hidden', !isHidden);
-  btnToggle.setAttribute('aria-expanded', String(isHidden));
-  toggleLabel.textContent = isHidden ? 'Ocultar ficha del experimento' : 'Ver ficha del experimento';
+  btn.addEventListener('click', () => {
+    const willShow = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !willShow);
+    btn.setAttribute('aria-expanded', String(willShow));
+    if (label && hideText) {
+      label.textContent = willShow ? hideText : showText;
+    }
+  });
 });

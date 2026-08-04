@@ -17,7 +17,168 @@
 
 <main class="page">
 
-  <h1 class="page-title">Elegí una variante</h1>
+  <h1 class="page-title">Experimento: optimización del checkout</h1>
+  <p class="page-intro">Buscamos entender qué cambios en el proceso de compra ayudan a que más personas completen su pedido. Acá reunimos el contexto del problema, las hipótesis que estamos probando y los prototipos de cada variante.</p>
+
+  <!-- 2. CONTEXTO DEL CASO -->
+  <section class="page-section">
+    <button class="accordion-toggle" id="btnToggleContext" aria-controls="panel-context" aria-expanded="false" data-show-text="Ver contexto del negocio" data-hide-text="Ocultar contexto del negocio">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+      <span class="accordion-toggle-label">Ver contexto del negocio</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="panel-context">
+      <h2 class="factsheet-heading">Contexto del negocio</h2>
+
+      <div class="info-block-item">
+        <h3 class="info-label">La empresa</h3>
+        <p>Marketplace líder de retail en Latinoamérica, con 15 años en el mercado, 85 millones de usuarios registrados y 28 millones de usuarios activos mensuales.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Crecimiento histórico</h3>
+        <p>~12% anual en usuarios y ~18% anual en ventas online durante los últimos 5 años, con una desaceleración reciente.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">El problema</h3>
+        <p>Los usuarios agregan productos al carrito con normalidad, pero una parte importante abandona durante el checkout.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Causas hipotéticas identificadas</h3>
+        <p>Costos de envío inesperados, tiempos de despacho poco claros, exceso de pasos antes de pagar y fricción en autenticación o medio de pago — sin evidencia validada de cuál pesa más.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Métrica principal afectada</h3>
+        <p>El Checkout Conversion Rate cayó de 48% a 36% en los últimos meses. También bajaron el revenue por sesión y la conversión de campañas de marketing, y subió el Cart Abandonment Rate.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Riesgo si no se resuelve en 6 meses</h3>
+        <p>Pérdida de participación de mercado, aumento del CAC, disminución del LTV, mayor inventario inmovilizado y deterioro de la rentabilidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. HIPÓTESIS DEL EXPERIMENTO -->
+  <section class="page-section">
+    <h2 class="section-heading">Hipótesis del experimento</h2>
+    <div class="hypothesis-list">
+
+      <div class="hypothesis-card hyp-1">
+        <span class="hypothesis-number">1</span>
+        <div class="hypothesis-body">
+          <p class="hypothesis-title">Costo total con envío</p>
+          <p class="hypothesis-text">Creemos que mostrar el costo total de la compra, incluido el envío, a los usuarios que revisan su carrito, cuando aún no han iniciado el checkout, reducirá el abandono porque evitará costos inesperados.</p>
+          <p class="hypothesis-success"><strong>Sabremos que funcionó si:</strong> aumenta el paso desde carrito a checkout y disminuye el abandono al seleccionar el despacho.</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card hyp-2">
+        <span class="hypothesis-number">2</span>
+        <div class="hypothesis-body">
+          <p class="hypothesis-title">Fecha estimada de entrega</p>
+          <p class="hypothesis-text">Creemos que mostrar una fecha estimada de entrega a los usuarios que evalúan completar su compra, cuando revisan el carrito, aumentará la conversión porque les dará mayor certeza sobre cuándo recibirán el producto.</p>
+          <p class="hypothesis-success"><strong>Sabremos que funcionó si:</strong> aumenta la cantidad de usuarios que avanza desde el carrito al pago.</p>
+        </div>
+      </div>
+
+      <div class="hypothesis-card hyp-3">
+        <span class="hypothesis-number">3</span>
+        <div class="hypothesis-body">
+          <p class="hypothesis-title">Checkout simplificado</p>
+          <p class="hypothesis-text">Creemos que reducir los pasos y campos del checkout para los usuarios con intención de compra, cuando intentan finalizar el pago, aumentará la conversión porque disminuirá el esfuerzo necesario para completar la compra.</p>
+          <p class="hypothesis-success"><strong>Sabremos que funcionó si:</strong> baja el tiempo promedio del checkout y aumenta su tasa de finalización.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. OBJETIVO Y RESULTADOS ESPERADOS -->
+  <section class="page-section">
+    <h2 class="section-heading">Objetivo y resultados esperados</h2>
+    <p class="section-text"><strong>Qué queremos aprender:</strong> si transparentar anticipadamente el costo total y la fecha de entrega, junto con simplificar el checkout, reduce la incertidumbre y el esfuerzo que dificultan completar la compra.</p>
+    <p class="section-text"><strong>Resultado deseado:</strong> aumentar el avance desde el carrito al pago y la tasa de finalización de compra, reduciendo el abandono y el tiempo promedio del checkout.</p>
+  </section>
+
+  <!-- 5, 6, 7. METODOLOGÍA, PÚBLICO OBJETIVO Y DURACIÓN -->
+  <section class="page-section">
+    <button class="accordion-toggle" id="btnToggleMethodology" aria-controls="panel-methodology" aria-expanded="false" data-show-text="Ver metodología y ejecución" data-hide-text="Ocultar metodología y ejecución">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+      <span class="accordion-toggle-label">Ver metodología y ejecución</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="panel-methodology">
+      <h2 class="factsheet-heading">Metodología y ejecución</h2>
+
+      <div class="info-block-item">
+        <h3 class="info-label">Método</h3>
+        <p>Prueba comparativa con prototipo interactivo. Se asignará aleatoriamente a los participantes cinco versiones del flujo: la actual (control), tres con cada cambio por separado (costo, fecha, checkout optimizado) y una con todos los cambios combinados, para comparar el efecto individual y conjunto de las modificaciones.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Variables a modificar y medir</h3>
+        <p><strong>Costo total con envío y fecha estimada de entrega:</strong> tasa de avance del carrito al pago, tasa de compra finalizada, abandono durante el proceso o al seleccionar despacho, y tiempo promedio para completar el checkout.</p>
+        <p><strong>Checkout simplificado:</strong> cantidad de pasos y campos reducidos.</p>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Público objetivo</h3>
+        <p>Usuarios con intención de compra: personas que agregan productos al carrito y avanzan hacia el checkout. Segmentos de análisis:</p>
+        <ul class="info-list">
+          <li>Usuarios con abandonos recientes de checkout</li>
+          <li>Usuarios que históricamente completan el checkout</li>
+        </ul>
+      </div>
+      <div class="info-block-item">
+        <h3 class="info-label">Duración</h3>
+        <p>2 semanas de prueba A/B en producción.</p>
+        <ul class="info-list">
+          <li><strong>Días 1 y 2:</strong> validación técnica y monitoreo de errores.</li>
+          <li><strong>Días 3 al 14:</strong> medición y comparación entre el grupo control y las nuevas experiencias.</li>
+        </ul>
+        <p>Condición de cierre: contar con una muestra suficiente y resultados concluyentes; de lo contrario, se extiende una semana adicional.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. MÉTRICAS Y CRITERIOS DE ÉXITO -->
+  <section class="page-section">
+    <button class="accordion-toggle" id="btnToggleMetrics" aria-controls="panel-metrics" aria-expanded="false" data-show-text="Ver métricas y criterios de éxito" data-hide-text="Ocultar métricas y criterios de éxito">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+      <span class="accordion-toggle-label">Ver métricas y criterios de éxito</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="panel-metrics">
+      <h2 class="factsheet-heading">Métricas y criterios de éxito</h2>
+
+      <div class="metric-card hyp-1">
+        <p class="metric-card-title">Costo total</p>
+        <p class="metric-card-label">Métricas</p>
+        <p class="metric-card-text">Tasa de avance del carrito al inicio del checkout, tasa de abandono en la etapa de despacho.</p>
+        <p class="metric-card-label">Criterio de éxito</p>
+        <p class="metric-card-text">La tasa de avance al checkout aumenta al menos 5% y el abandono en la etapa de despacho disminuye al menos 5%.</p>
+      </div>
+
+      <div class="metric-card hyp-2">
+        <p class="metric-card-title">Fecha estimada de entrega</p>
+        <p class="metric-card-label">Métricas</p>
+        <p class="metric-card-text">Tasa de avance del carrito al inicio del checkout, conversión del carrito a compra finalizada.</p>
+        <p class="metric-card-label">Criterio de éxito</p>
+        <p class="metric-card-text">La tasa de avance al checkout aumenta al menos 5% y la conversión del carrito a compra finalizada aumenta al menos 3%.</p>
+      </div>
+
+      <div class="metric-card hyp-3">
+        <p class="metric-card-title">Checkout simplificado</p>
+        <p class="metric-card-label">Métricas</p>
+        <p class="metric-card-text">Tasa de finalización del checkout, tiempo promedio del checkout, tasa de errores.</p>
+        <p class="metric-card-label">Criterio de éxito</p>
+        <p class="metric-card-text">La finalización del checkout aumenta de 36% a 40% y el tiempo promedio disminuye al menos 15%, sin aumentar la tasa de errores.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. LAS 5 VARIANTES A PROBAR -->
+  <h2 class="section-heading">Elegí una variante para probar</h2>
   <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
   <div class="hub-layout">
@@ -153,15 +314,16 @@
   </div>
 
   <aside class="factsheet-panel">
-    <button class="factsheet-toggle" id="btnToggleFactsheet" aria-expanded="false">
+    <button class="accordion-toggle" id="btnToggleFactsheet" aria-controls="factsheet" aria-expanded="false" data-show-text="Ver diseño estadístico" data-hide-text="Ocultar diseño estadístico">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      <span id="factsheetToggleLabel">Ver ficha del experimento</span>
+      <span class="accordion-toggle-label">Ver diseño estadístico</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
-    <div class="factsheet hidden" id="factsheet">
+    <div class="accordion-panel hidden" id="factsheet">
       <h2 class="factsheet-heading">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-        Ficha del experimento
+        Diseño estadístico
       </h2>
       <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
       <table class="factsheet-table">
