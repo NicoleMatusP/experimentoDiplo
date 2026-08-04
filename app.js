@@ -18,6 +18,25 @@ const PICKUP_POINTS = [
 let deliveryMethod = 'envio';
 let selectedPickupPointId = PICKUP_POINTS[0].id;
 
+const PAYMENT_LABELS = {
+  tarjeta: 'Tarjeta',
+  efectivo: 'Efectivo',
+};
+let paymentMethod = 'tarjeta';
+
+const SAVED_CARD = { brand: 'Visa', last4: '4242', holder: 'Nicole Matus', expiry: '08/29' };
+let useSavedCard = true;
+
+function getCardDisplayText() {
+  if (useSavedCard) {
+    return `${SAVED_CARD.brand} •••• ${SAVED_CARD.last4}`;
+  }
+  const cardName = document.getElementById('cardName').value.trim();
+  const cardNumber = document.getElementById('cardNumber').value.trim();
+  const last4 = cardNumber.replace(/\s/g, '').slice(-4);
+  return cardNumber ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}` : '—';
+}
+
 // ---------------------------------------------------------------------------
 // Iconos SVG inline (sin dependencias externas)
 // ---------------------------------------------------------------------------
@@ -182,8 +201,6 @@ function updateStepButtons(stepNumber) {
 function fillReview() {
   const fullName = document.getElementById('fullName').value.trim();
   const phone = document.getElementById('phone').value.trim();
-  const cardName = document.getElementById('cardName').value.trim();
-  const cardNumber = document.getElementById('cardNumber').value.trim();
 
   document.getElementById('reviewName').textContent = fullName || '—';
   document.getElementById('reviewPhone').textContent = phone || '—';
@@ -201,10 +218,13 @@ function fillReview() {
     document.getElementById('reviewAddress').textContent = [address, city].filter(Boolean).join(', ') || '—';
   }
 
-  const last4 = cardNumber.replace(/\s/g, '').slice(-4);
-  document.getElementById('reviewCard').textContent = cardNumber
-    ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}`
-    : '—';
+  if (paymentMethod === 'tarjeta') {
+    document.getElementById('reviewCardLabel').textContent = 'Tarjeta';
+    document.getElementById('reviewCard').textContent = getCardDisplayText();
+  } else {
+    document.getElementById('reviewCardLabel').textContent = 'Medio de pago';
+    document.getElementById('reviewCard').textContent = PAYMENT_LABELS[paymentMethod];
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -257,6 +277,39 @@ document.querySelectorAll('input[name="deliveryMethod"]').forEach(input => {
     toggleDeliveryDetailBlocks();
     renderSummary();
   });
+});
+
+// ---------------------------------------------------------------------------
+// Medio de pago: tarjeta preseleccionada por defecto, modificable
+// ---------------------------------------------------------------------------
+function togglePaymentDetailBlocks() {
+  document.getElementById('cardFieldsBlock').classList.toggle('hidden', paymentMethod !== 'tarjeta');
+}
+
+document.querySelectorAll('input[name="paymentMethod"]').forEach(input => {
+  input.addEventListener('change', () => {
+    paymentMethod = input.value;
+    logEvent('click', { button: 'medio_de_pago', value: paymentMethod });
+    updateOptionCardSelection();
+    togglePaymentDetailBlocks();
+  });
+});
+
+function toggleCardViews() {
+  document.getElementById('savedCardView').classList.toggle('hidden', !useSavedCard);
+  document.getElementById('cardFormView').classList.toggle('hidden', useSavedCard);
+}
+
+document.getElementById('btnChangeCard').addEventListener('click', () => {
+  useSavedCard = false;
+  logEvent('click', { button: 'usar_otra_tarjeta' });
+  toggleCardViews();
+});
+
+document.getElementById('btnUseSavedCard').addEventListener('click', () => {
+  useSavedCard = true;
+  logEvent('click', { button: 'usar_tarjeta_guardada' });
+  toggleCardViews();
 });
 
 // ---------------------------------------------------------------------------
@@ -358,8 +411,12 @@ document.getElementById('btnStepPrimary').addEventListener('click', () => {
     document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
   }
 
+  document.getElementById('paymentValue3').textContent = paymentMethod === 'tarjeta'
+    ? getCardDisplayText()
+    : PAYMENT_LABELS[paymentMethod];
+
   goToConfirmation();
-  logEvent('completed', { order: orderNumber, delivery_method: deliveryMethod });
+  logEvent('completed', { order: orderNumber, delivery_method: deliveryMethod, payment_method: paymentMethod });
 });
 
 document.getElementById('btnStepBack').addEventListener('click', () => {
@@ -383,10 +440,18 @@ document.getElementById('btnRestart').addEventListener('click', () => {
   selectedPickupPointId = PICKUP_POINTS[0].id;
   document.getElementById('methodEnvio').checked = true;
   document.getElementById('methodRetiro').checked = false;
-  updateOptionCardSelection();
   toggleDeliveryDetailBlocks();
   renderPickupList();
 
+  paymentMethod = 'tarjeta';
+  document.getElementById('methodTarjeta').checked = true;
+  document.getElementById('methodEfectivo').checked = false;
+  togglePaymentDetailBlocks();
+
+  useSavedCard = true;
+  toggleCardViews();
+
+  updateOptionCardSelection();
   renderAll();
   goToCart();
 });

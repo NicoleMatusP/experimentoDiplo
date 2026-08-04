@@ -166,23 +166,60 @@
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                 Medio de pago
               </h2>
-              <div class="field">
-                <label for="cardName">Nombre en la tarjeta</label>
-                <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
+              <div class="option-list" id="paymentOptions">
+                <label class="option-card" id="optionTarjeta">
+                  <input type="radio" name="paymentMethod" value="tarjeta" id="methodTarjeta" checked>
+                  <span class="option-radio-dot"></span>
+                  <span class="option-body">
+                    <span class="option-title">Tarjeta de crédito o débito</span>
+                    <span class="option-meta">Visa, Mastercard u otra</span>
+                  </span>
+                </label>
+                <label class="option-card" id="optionEfectivo">
+                  <input type="radio" name="paymentMethod" value="efectivo" id="methodEfectivo">
+                  <span class="option-radio-dot"></span>
+                  <span class="option-body">
+                    <span class="option-title">Efectivo</span>
+                    <span class="option-meta">Pagás al recibir o retirar tu pedido</span>
+                  </span>
+                </label>
               </div>
-              <div class="field">
-                <label for="cardNumber">Número de tarjeta</label>
-                <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+            </div>
+
+            <div class="form-block" id="cardFieldsBlock">
+              <h2 class="form-heading">Datos de la tarjeta</h2>
+
+              <div id="savedCardView">
+                <div class="option-card is-selected">
+                  <span class="option-radio-dot"></span>
+                  <span class="option-body">
+                    <span class="option-title" id="savedCardTitle">Visa •••• 4242</span>
+                    <span class="option-meta" id="savedCardMeta">Nicole Matus · Vence 08/29</span>
+                  </span>
+                </div>
+                <button type="button" class="text-link" id="btnChangeCard">Usar otra tarjeta</button>
               </div>
-              <div class="field-row">
+
+              <div class="hidden" id="cardFormView">
                 <div class="field">
-                  <label for="cardExpiry">Vencimiento</label>
-                  <input type="text" id="cardExpiry" placeholder="MM/AA">
+                  <label for="cardName">Nombre en la tarjeta</label>
+                  <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
                 </div>
                 <div class="field">
-                  <label for="cardCvv">CVV</label>
-                  <input type="text" id="cardCvv" placeholder="000">
+                  <label for="cardNumber">Número de tarjeta</label>
+                  <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
                 </div>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="cardExpiry">Vencimiento</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/AA">
+                  </div>
+                  <div class="field">
+                    <label for="cardCvv">CVV</label>
+                    <input type="text" id="cardCvv" placeholder="000">
+                  </div>
+                </div>
+                <button type="button" class="text-link" id="btnUseSavedCard">Usar tarjeta guardada</button>
               </div>
             </div>
           </div>
@@ -214,7 +251,7 @@
                 Medio de pago
               </h2>
               <div class="summary-row">
-                <span>Tarjeta</span>
+                <span id="reviewCardLabel">Tarjeta</span>
                 <span id="reviewCard">—</span>
               </div>
             </div>
@@ -273,6 +310,10 @@
           <div class="summary-row">
             <span id="addressLabel3">Dirección</span>
             <span id="addressValue3"></span>
+          </div>
+          <div class="summary-row">
+            <span>Medio de pago</span>
+            <span id="paymentValue3"></span>
           </div>
         </div>
       </div>
