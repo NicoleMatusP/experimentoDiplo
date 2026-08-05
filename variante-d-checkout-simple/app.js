@@ -139,6 +139,39 @@ function renderCheckoutSummary() {
 }
 
 // ---------------------------------------------------------------------------
+// Dirección de envío: la guardada viene preseleccionada, se puede cambiar
+// ---------------------------------------------------------------------------
+const SAVED_ADDRESS = {
+  line: 'Av. Providencia 1234, depto. 802',
+  detail: 'Providencia, Santiago · 7500000'
+};
+let useSavedAddress = true;
+
+function getAddressText() {
+  if (useSavedAddress) return SAVED_ADDRESS.line;
+  const address = document.getElementById('address').value.trim();
+  const city = document.getElementById('city').value.trim();
+  return [address, city].filter(Boolean).join(', ') || '—';
+}
+
+function toggleAddressViews() {
+  document.getElementById('savedAddressView').classList.toggle('hidden', !useSavedAddress);
+  document.getElementById('addressFormView').classList.toggle('hidden', useSavedAddress);
+}
+
+document.getElementById('btnChangeAddress').addEventListener('click', () => {
+  useSavedAddress = false;
+  logEvent('click', { button: 'usar_otra_direccion' });
+  toggleAddressViews();
+});
+
+document.getElementById('btnUseSavedAddress').addEventListener('click', () => {
+  useSavedAddress = true;
+  logEvent('click', { button: 'usar_direccion_guardada' });
+  toggleAddressViews();
+});
+
+// ---------------------------------------------------------------------------
 // Render carrito
 // ---------------------------------------------------------------------------
 function renderProductList() {
@@ -209,9 +242,7 @@ document.getElementById('btnConfirm').addEventListener('click', () => {
   document.getElementById('totalValue3').textContent = formatCLP(getTotal());
   document.getElementById('deliveryValue3').textContent = getDeliveryEstimateText().replace('Llega ', '');
 
-  const address = document.getElementById('address').value.trim();
-  const city = document.getElementById('city').value.trim();
-  document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
+  document.getElementById('addressValue3').textContent = getAddressText();
 
   const cardName = document.getElementById('cardName').value.trim();
   const cardNumber = document.getElementById('cardNumber').value.trim();
@@ -229,9 +260,11 @@ document.getElementById('btnConfirm').addEventListener('click', () => {
 document.getElementById('btnRestart').addEventListener('click', () => {
   logEvent('click', { button: 'volver_al_inicio', screen: 'confirmation' });
   PRODUCTS.forEach(p => { p.qty = p.id === 'p3' ? 2 : 1; });
-  ['fullName','address','city','zip','phone','cardName','cardNumber','cardExpiry','cardCvv'].forEach(id => {
+  ['address','city','zip','cardName','cardNumber','cardExpiry','cardCvv'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  useSavedAddress = true;
+  toggleAddressViews();
   renderAll();
   goToCart();
 });

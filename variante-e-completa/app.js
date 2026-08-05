@@ -204,23 +204,15 @@ function updateStepButtons(stepNumber) {
 }
 
 function fillReview() {
-  const fullName = document.getElementById('fullName').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-
-  document.getElementById('reviewName').textContent = fullName || '—';
-  document.getElementById('reviewPhone').textContent = phone || '—';
-
   if (deliveryMethod === 'retiro') {
     const point = PICKUP_POINTS.find(p => p.id === selectedPickupPointId);
     document.getElementById('reviewDeliveryHeading').textContent = 'Retiro en punto de despacho';
     document.getElementById('reviewAddressLabel').textContent = 'Punto de retiro';
     document.getElementById('reviewAddress').textContent = point ? `${point.name} — ${point.address}` : '—';
   } else {
-    const address = document.getElementById('address').value.trim();
-    const city = document.getElementById('city').value.trim();
     document.getElementById('reviewDeliveryHeading').textContent = 'Dirección de envío';
     document.getElementById('reviewAddressLabel').textContent = 'Dirección';
-    document.getElementById('reviewAddress').textContent = [address, city].filter(Boolean).join(', ') || '—';
+    document.getElementById('reviewAddress').textContent = getAddressText();
   }
 
   if (paymentMethod === 'tarjeta') {
@@ -283,6 +275,39 @@ document.querySelectorAll('input[name="deliveryMethod"]').forEach(input => {
     toggleDeliveryDetailBlocks();
     renderSummary();
   });
+});
+
+// ---------------------------------------------------------------------------
+// Dirección de envío: la guardada viene preseleccionada, se puede cambiar
+// ---------------------------------------------------------------------------
+const SAVED_ADDRESS = {
+  line: 'Av. Providencia 1234, depto. 802',
+  detail: 'Providencia, Santiago · 7500000'
+};
+let useSavedAddress = true;
+
+function getAddressText() {
+  if (useSavedAddress) return SAVED_ADDRESS.line;
+  const address = document.getElementById('address').value.trim();
+  const city = document.getElementById('city').value.trim();
+  return [address, city].filter(Boolean).join(', ') || '—';
+}
+
+function toggleAddressViews() {
+  document.getElementById('savedAddressView').classList.toggle('hidden', !useSavedAddress);
+  document.getElementById('addressFormView').classList.toggle('hidden', useSavedAddress);
+}
+
+document.getElementById('btnChangeAddress').addEventListener('click', () => {
+  useSavedAddress = false;
+  logEvent('click', { button: 'usar_otra_direccion' });
+  toggleAddressViews();
+});
+
+document.getElementById('btnUseSavedAddress').addEventListener('click', () => {
+  useSavedAddress = true;
+  logEvent('click', { button: 'usar_direccion_guardada' });
+  toggleAddressViews();
 });
 
 // ---------------------------------------------------------------------------
@@ -412,9 +437,7 @@ document.getElementById('btnStepPrimary').addEventListener('click', () => {
   } else {
     document.getElementById('deliveryValue3').textContent = getDeliveryEstimateText().replace('Llega ', '');
     document.getElementById('addressLabel3').textContent = 'Dirección';
-    const address = document.getElementById('address').value.trim();
-    const city = document.getElementById('city').value.trim();
-    document.getElementById('addressValue3').textContent = [address, city].filter(Boolean).join(', ') || '—';
+    document.getElementById('addressValue3').textContent = getAddressText();
   }
 
   document.getElementById('paymentValue3').textContent = paymentMethod === 'tarjeta'
@@ -440,9 +463,11 @@ document.getElementById('btnStepBack').addEventListener('click', () => {
 document.getElementById('btnRestart').addEventListener('click', () => {
   logEvent('click', { button: 'volver_al_inicio', screen: 'confirmation' });
   PRODUCTS.forEach(p => { p.qty = p.id === 'p3' ? 2 : 1; });
-  ['fullName','address','city','zip','phone','cardName','cardNumber','cardExpiry','cardCvv'].forEach(id => {
+  ['address','city','zip','cardName','cardNumber','cardExpiry','cardCvv'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  useSavedAddress = true;
+  toggleAddressViews();
 
   deliveryMethod = 'envio';
   selectedPickupPointId = PICKUP_POINTS[0].id;

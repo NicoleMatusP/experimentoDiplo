@@ -107,11 +107,11 @@ body {
   }
   .device-screen {
     width: auto;
-    max-width: 390px;
-    height: 844px;
+    max-width: 320px;
+    height: 693px;
     max-height: calc(100dvh - 132px);
     aspect-ratio: 390 / 844;
-    border-radius: 40px;
+    border-radius: 34px;
     box-shadow:
       0 0 0 10px #1c1c1e,
       0 0 0 12px #050505,
@@ -125,14 +125,14 @@ body {
 
 /* Iconos */
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
   vertical-align: middle;
 }
-.icon-sm { width: 15px; height: 15px; }
-.icon-md { width: 24px; height: 24px; }
-.icon-lg { width: 40px; height: 40px; }
+.icon-sm { width: 13px; height: 13px; }
+.icon-md { width: 20px; height: 20px; }
+.icon-lg { width: 32px; height: 32px; }
 
 .topbar {
   flex: 0 0 auto;
@@ -160,21 +160,21 @@ main#app {
 .topbar-inner {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 14px 16px;
+  padding: 11px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .logo {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 15px;
   letter-spacing: 0.02em;
 }
 .cart-indicator {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gray-600);
 }
 
@@ -183,26 +183,28 @@ main#app {
   min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   max-width: 1040px;
   margin: 0 auto;
-  padding: 20px 16px 24px;
+  padding: 14px 14px 18px;
   width: 100%;
 }
+.page::-webkit-scrollbar { display: none; }
 .page-narrow {
   max-width: 560px;
 }
 
 .page-title {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 600;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   color: var(--gray-900);
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 14px;
 }
 
 /* Barra de acciones — flex item fijo al final de la columna, nunca se
@@ -211,7 +213,7 @@ main#app {
   flex: 0 0 auto;
   background: #fff;
   border-top: 1px solid var(--gray-200);
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
 }
 .bottom-bar-inner {
   max-width: 1040px;
@@ -237,7 +239,7 @@ main#app {
 .progress-bar {
   display: flex;
   list-style: none;
-  margin: 0 0 24px;
+  margin: 0 0 18px;
   padding: 0;
 }
 .progress-step {
@@ -251,7 +253,7 @@ main#app {
 .progress-step::before {
   content: '';
   position: absolute;
-  top: 13px;
+  top: 11px;
   left: -50%;
   width: 100%;
   height: 2px;
@@ -266,13 +268,13 @@ main#app {
 .progress-dot {
   position: relative;
   z-index: 1;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   background: var(--gray-200);
   color: var(--gray-600);
@@ -286,8 +288,8 @@ main#app {
   color: #fff;
 }
 .progress-label {
-  margin-top: 6px;
-  font-size: 11px;
+  margin-top: 4px;
+  font-size: 10px;
   color: var(--gray-500);
 }
 .progress-step.is-active .progress-label {
@@ -305,8 +307,8 @@ main#app {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 14px;
+  gap: 10px;
+  padding: 10px;
   border: 1px solid var(--gray-300);
   border-radius: 8px;
   cursor: pointer;
@@ -348,17 +350,17 @@ main#app {
   gap: 3px;
 }
 .option-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--gray-900);
 }
 .option-meta {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gray-500);
 }
 .option-price {
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--gray-900);
   white-space: nowrap;
@@ -392,15 +394,15 @@ main#app {
 }
 .product-item {
   display: flex;
-  gap: 12px;
-  padding: 14px;
+  gap: 10px;
+  padding: 10px;
   border-bottom: 1px solid var(--gray-200);
 }
 .product-item:last-child { border-bottom: none; }
 
 .product-thumb {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   background: var(--gray-100);
   border-radius: 6px;
   flex-shrink: 0;
@@ -419,12 +421,12 @@ main#app {
   justify-content: center;
 }
 .product-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--gray-900);
 }
 .product-meta {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--gray-500);
 }
 
@@ -437,7 +439,7 @@ main#app {
   min-width: 78px;
 }
 .product-price {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--gray-900);
 }
@@ -450,20 +452,20 @@ main#app {
   overflow: hidden;
 }
 .qty-control button {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border: none;
   background: var(--gray-100);
   color: var(--gray-700);
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1;
 }
 .qty-control button:hover { background: var(--gray-200); }
 .qty-control span {
-  width: 26px;
+  width: 22px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gray-700);
 }
 
@@ -471,10 +473,10 @@ main#app {
 .delivery-line {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
   color: var(--gray-600);
-  padding: 2px 4px 14px;
+  padding: 2px 4px 10px;
 }
 
 /* Summary box */
@@ -482,27 +484,27 @@ main#app {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
 }
 .summary-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: var(--gray-900);
 }
 .summary-row {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gray-700);
-  padding: 6px 0;
+  padding: 5px 0;
 }
 .summary-total {
   border-top: 1px solid var(--gray-200);
-  margin-top: 6px;
-  padding-top: 12px;
-  font-size: 15px;
+  margin-top: 4px;
+  padding-top: 10px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--gray-900);
 }
@@ -513,13 +515,13 @@ main#app {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  padding: 13px 20px;
-  min-height: 46px;
+  padding: 11px 18px;
+  min-height: 42px;
 }
 .btn-block { width: 100%; }
 .btn-primary {
@@ -540,36 +542,41 @@ main#app {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 .form-heading {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 6px;
+  font-size: 13px;
   font-weight: 600;
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: var(--gray-900);
 }
 .form-heading .icon { color: var(--gray-400); }
 .field {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .field label {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gray-600);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .field input {
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
+  padding: 8px 10px;
+  font-size: 13px;
   border: 1px solid var(--gray-300);
   border-radius: 6px;
   background: var(--gray-50);
   color: var(--gray-900);
+}
+/* En mobile real (sin marco) los campos suben a 16px: por debajo de ese
+   tamaño iOS hace zoom automático al enfocar un input. */
+@media (max-width: 479px) {
+  .field input { font-size: 16px; }
 }
 .field input:focus {
   outline: none;
@@ -579,7 +586,7 @@ main#app {
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* Confirmation */
@@ -587,24 +594,24 @@ main#app {
   background: #fff;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  padding: 24px 20px;
+  padding: 18px 16px;
   text-align: left;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 .confirm-icon {
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .confirm-order-number {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--gray-500);
-  margin: -10px 0 20px;
+  margin: -8px 0 16px;
 }
 .confirm-detail {
   border-top: 1px solid var(--gray-200);
   border-bottom: 1px solid var(--gray-200);
-  padding: 8px 0;
-  margin-bottom: 20px;
+  padding: 6px 0;
+  margin-bottom: 16px;
 }
 
 /* Debug panel (oculto por defecto, se activa con Alt+Shift+L) */

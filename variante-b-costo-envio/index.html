@@ -97,27 +97,34 @@
               <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               Dirección de envío
             </h2>
-            <div class="field">
-              <label for="fullName">Nombre completo</label>
-              <input type="text" id="fullName" placeholder="Nombre y apellido">
-            </div>
-            <div class="field">
-              <label for="address">Dirección</label>
-              <input type="text" id="address" placeholder="Calle, número, depto.">
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="city">Ciudad</label>
-                <input type="text" id="city" placeholder="Ciudad">
+
+            <div id="savedAddressView">
+              <div class="option-card is-selected">
+                <span class="option-radio-dot"></span>
+                <span class="option-body">
+                  <span class="option-title" id="savedAddressTitle">Av. Providencia 1234, depto. 802</span>
+                  <span class="option-meta" id="savedAddressMeta">Providencia, Santiago · 7500000</span>
+                </span>
               </div>
-              <div class="field">
-                <label for="zip">Código postal</label>
-                <input type="text" id="zip" placeholder="0000000">
-              </div>
+              <button type="button" class="text-link" id="btnChangeAddress">Usar otra dirección</button>
             </div>
-            <div class="field">
-              <label for="phone">Teléfono</label>
-              <input type="tel" id="phone" placeholder="+56 9 0000 0000">
+
+            <div class="hidden" id="addressFormView">
+              <div class="field">
+                <label for="address">Dirección</label>
+                <input type="text" id="address" placeholder="Calle, número, depto.">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="city">Ciudad</label>
+                  <input type="text" id="city" placeholder="Ciudad">
+                </div>
+                <div class="field">
+                  <label for="zip">Código postal</label>
+                  <input type="text" id="zip" placeholder="0000000">
+                </div>
+              </div>
+              <button type="button" class="text-link" id="btnUseSavedAddress">Usar dirección guardada</button>
             </div>
           </div>
         </div>
@@ -158,16 +165,8 @@
               Dirección de envío
             </h2>
             <div class="summary-row">
-              <span>Nombre</span>
-              <span id="reviewName">—</span>
-            </div>
-            <div class="summary-row">
               <span>Dirección</span>
               <span id="reviewAddress">—</span>
-            </div>
-            <div class="summary-row">
-              <span>Teléfono</span>
-              <span id="reviewPhone">—</span>
             </div>
           </div>
 
