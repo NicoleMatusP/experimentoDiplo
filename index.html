@@ -8,12 +8,26 @@
 </head>
 <body>
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <span class="logo">Prototipos de checkout</span>
-    <span class="hub-subtitle">Experimento de conversión</span>
-  </div>
-</header>
+<div class="sticky-header">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="logo">Prototipos de checkout</span>
+      <span class="hub-subtitle">Experimento de conversión</span>
+    </div>
+  </header>
+
+  <nav class="section-nav" aria-label="Secciones de la página">
+    <div class="section-nav-inner">
+      <a href="#contexto" class="section-nav-link">Contexto</a>
+      <a href="#hipotesis" class="section-nav-link">Hipótesis</a>
+      <a href="#objetivo" class="section-nav-link">Objetivo</a>
+      <a href="#metodologia" class="section-nav-link">Metodología</a>
+      <a href="#metricas" class="section-nav-link">Métricas</a>
+      <a href="#estadistica" class="section-nav-link">Diseño estadístico</a>
+      <a href="#variantes" class="section-nav-link">Variantes</a>
+    </div>
+  </nav>
+</div>
 
 <main class="page">
 
@@ -21,16 +35,14 @@
   <p class="page-intro">Buscamos entender qué cambios en el proceso de compra ayudan a que más personas completen su pedido. Acá reunimos el contexto del problema, las hipótesis que estamos probando y los prototipos de cada variante.</p>
 
   <!-- 2. CONTEXTO DEL CASO -->
-  <section class="page-section">
-    <button class="accordion-toggle" id="btnToggleContext" aria-controls="panel-context" aria-expanded="false" data-show-text="Ver contexto del negocio" data-hide-text="Ocultar contexto del negocio">
+  <section class="page-section" id="contexto">
+    <button class="accordion-toggle" id="btnToggleContext" aria-controls="panel-context" aria-expanded="false">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
-      <span class="accordion-toggle-label">Ver contexto del negocio</span>
+      <span class="accordion-toggle-label">01 · Contexto del negocio</span>
       <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
     <div class="accordion-panel hidden" id="panel-context">
-      <h2 class="factsheet-heading">Contexto del negocio</h2>
-
       <div class="info-block-item">
         <h3 class="info-label">La empresa</h3>
         <p>Marketplace líder de retail en Latinoamérica, con 15 años en el mercado, 85 millones de usuarios registrados y 28 millones de usuarios activos mensuales.</p>
@@ -59,8 +71,8 @@
   </section>
 
   <!-- 3. HIPÓTESIS DEL EXPERIMENTO -->
-  <section class="page-section">
-    <h2 class="section-heading">Hipótesis del experimento</h2>
+  <section class="page-section" id="hipotesis">
+    <h2 class="section-heading">02 · Hipótesis del experimento</h2>
     <div class="hypothesis-list">
 
       <div class="hypothesis-card hyp-1">
@@ -94,23 +106,21 @@
   </section>
 
   <!-- 4. OBJETIVO Y RESULTADOS ESPERADOS -->
-  <section class="page-section">
-    <h2 class="section-heading">Objetivo y resultados esperados</h2>
+  <section class="page-section" id="objetivo">
+    <h2 class="section-heading">03 · Objetivo y resultados esperados</h2>
     <p class="section-text"><strong>Qué queremos aprender:</strong> si transparentar anticipadamente el costo total y la fecha de entrega, junto con simplificar el checkout, reduce la incertidumbre y el esfuerzo que dificultan completar la compra.</p>
     <p class="section-text"><strong>Resultado deseado:</strong> aumentar el avance desde el carrito al pago y la tasa de finalización de compra, reduciendo el abandono y el tiempo promedio del checkout.</p>
   </section>
 
   <!-- 5, 6, 7. METODOLOGÍA, PÚBLICO OBJETIVO Y DURACIÓN -->
-  <section class="page-section">
-    <button class="accordion-toggle" id="btnToggleMethodology" aria-controls="panel-methodology" aria-expanded="false" data-show-text="Ver metodología y ejecución" data-hide-text="Ocultar metodología y ejecución">
+  <section class="page-section" id="metodologia">
+    <button class="accordion-toggle" id="btnToggleMethodology" aria-controls="panel-methodology" aria-expanded="false">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-      <span class="accordion-toggle-label">Ver metodología y ejecución</span>
+      <span class="accordion-toggle-label">04 · Metodología y ejecución</span>
       <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
     <div class="accordion-panel hidden" id="panel-methodology">
-      <h2 class="factsheet-heading">Metodología y ejecución</h2>
-
       <div class="info-block-item">
         <h3 class="info-label">Método</h3>
         <p>Prueba comparativa con prototipo interactivo. Se asignará aleatoriamente a los participantes cinco versiones del flujo: la actual (control), tres con cada cambio por separado (costo, fecha, checkout optimizado) y una con todos los cambios combinados, para comparar el efecto individual y conjunto de las modificaciones.</p>
@@ -141,16 +151,14 @@
   </section>
 
   <!-- 8. MÉTRICAS Y CRITERIOS DE ÉXITO -->
-  <section class="page-section">
-    <button class="accordion-toggle" id="btnToggleMetrics" aria-controls="panel-metrics" aria-expanded="false" data-show-text="Ver métricas y criterios de éxito" data-hide-text="Ocultar métricas y criterios de éxito">
+  <section class="page-section" id="metricas">
+    <button class="accordion-toggle" id="btnToggleMetrics" aria-controls="panel-metrics" aria-expanded="false">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
-      <span class="accordion-toggle-label">Ver métricas y criterios de éxito</span>
+      <span class="accordion-toggle-label">05 · Métricas y criterios de éxito</span>
       <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
     <div class="accordion-panel hidden" id="panel-metrics">
-      <h2 class="factsheet-heading">Métricas y criterios de éxito</h2>
-
       <div class="metric-card hyp-1">
         <p class="metric-card-title">Costo total</p>
         <p class="metric-card-label">Métricas</p>
@@ -178,7 +186,8 @@
   </section>
 
   <!-- 10. LAS 5 VARIANTES A PROBAR -->
-  <h2 class="section-heading">Elegí una variante para probar</h2>
+  <section class="page-section" id="variantes">
+  <h2 class="section-heading">07 · Elegí una variante para probar</h2>
   <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
   <div class="hub-layout">
@@ -313,18 +322,14 @@
 
   </div>
 
-  <aside class="factsheet-panel">
-    <button class="accordion-toggle" id="btnToggleFactsheet" aria-controls="factsheet" aria-expanded="false" data-show-text="Ver diseño estadístico" data-hide-text="Ocultar diseño estadístico">
+  <aside class="factsheet-panel" id="estadistica">
+    <button class="accordion-toggle" id="btnToggleFactsheet" aria-controls="factsheet" aria-expanded="false">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      <span class="accordion-toggle-label">Ver diseño estadístico</span>
+      <span class="accordion-toggle-label">06 · Diseño estadístico</span>
       <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
     <div class="accordion-panel hidden" id="factsheet">
-      <h2 class="factsheet-heading">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-        Diseño estadístico
-      </h2>
       <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
       <table class="factsheet-table">
         <tr><td>Conversión base actual</td><td>36%</td></tr>
@@ -339,6 +344,7 @@
   </aside>
 
   </div>
+  </section>
 
 </main>
 

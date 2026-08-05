@@ -22,23 +22,66 @@ html, body {
   color: var(--gray-800);
   background: var(--gray-50);
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Página responsive: el contenido se centra en pantallas anchas, sin
    simular un marco de teléfono (eso es solo para los prototipos). */
 
 .hidden { display: none !important; }
 
-.topbar {
-  background: #fff;
-  border-bottom: 1px solid var(--gray-200);
+/* Cabecera pegajosa: identidad del sitio + menú de secciones, como un
+   solo bloque (evita tener que calcular offsets entre dos sticky). */
+.sticky-header {
   position: sticky;
   top: 0;
   z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+}
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
 }
 .topbar-inner {
   max-width: 480px;
   margin: 0 auto;
   padding: 16px;
+}
+
+/* Menú de secciones: tira de píldoras con scroll horizontal en mobile. */
+.section-nav-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.section-nav-inner::-webkit-scrollbar { display: none; }
+.section-nav-link {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.section-nav-link.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Deja aire arriba de cada sección al saltar desde el menú, para que
+   no quede tapada debajo de la cabecera pegajosa. */
+.page-section,
+.factsheet-panel {
+  scroll-margin-top: 118px;
 }
 .logo {
   font-weight: 700;
@@ -296,18 +339,8 @@ html, body {
 }
 
 /* Ficha del experimento (diseño estadístico) — el toggle y el panel
-   reutilizan .accordion-toggle / .accordion-panel definidos arriba. */
-.factsheet-heading {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--gray-700);
-  margin: 0 0 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
+   reutilizan .accordion-toggle / .accordion-panel definidos arriba;
+   el número + título del botón ya cumple el rol de encabezado. */
 .factsheet-note {
   font-size: 12px;
   color: var(--gray-600);
@@ -351,6 +384,7 @@ html, body {
 --------------------------------------------------------------------- */
 @media (min-width: 760px) {
   .topbar-inner { max-width: 880px; }
+  .section-nav-inner { max-width: 880px; overflow-x: visible; flex-wrap: wrap; }
   .page { max-width: 880px; }
 
   .hub-layout {
