@@ -285,10 +285,12 @@ html {
 .hyp-3 { background: #eff8fc; border-color: #c6e6f2; }
 .hyp-3 .hypothesis-number { background: #2b84ad; }
 
+/* Agrupa las secciones 06 y 07; el gap replica el margen que separa al
+   resto de las secciones entre sí (.page-section). */
 .hub-layout {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 22px;
 }
 
 /* Tarjetas de variante */
@@ -378,42 +380,13 @@ html {
 }
 
 /* ---------------------------------------------------------------------
-   Desktop / pantallas anchas: la ficha del experimento se ve al lado
-   de las tarjetas, siempre desplegada (sin botón para mostrarla).
-   Por debajo de este ancho, vuelve a la zona inferior, colapsada.
+   Desktop / pantallas anchas: solo se ensancha el contenido. Las siete
+   secciones se comportan igual que en mobile — todas colapsables, una
+   debajo de otra — para que la numeración 01→07 se lea igual en
+   cualquier ancho.
 --------------------------------------------------------------------- */
 @media (min-width: 760px) {
   .topbar-inner { max-width: 880px; }
   .section-nav-inner { max-width: 880px; overflow-x: visible; flex-wrap: wrap; }
   .page { max-width: 880px; }
-
-  .hub-layout {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 28px;
-  }
-  /* El HTML pone "Diseño estadístico" antes que "Variantes" (así el
-     orden de lectura respeta la numeración 06 → 07), pero visualmente
-     en desktop las tarjetas van a la izquierda como antes. */
-  #variantes {
-    order: 1;
-    flex: 1;
-    min-width: 0;
-  }
-  .factsheet-panel {
-    order: 2;
-    width: 300px;
-    flex-shrink: 0;
-  }
-  /* En desktop, la columna de variantes y la ficha estadística se ven
-     siempre desplegadas (sin botón), como un panel fijo al lado del otro. */
-  #variantes .accordion-toggle,
-  .factsheet-panel .accordion-toggle {
-    display: none;
-  }
-  #variantes .accordion-panel.hidden,
-  .factsheet-panel .accordion-panel.hidden {
-    display: block !important;
-    margin-top: 0;
-  }
 }

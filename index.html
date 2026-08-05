@@ -36,13 +36,15 @@
 
   <!-- 2. CONTEXTO DEL CASO -->
   <section class="page-section" id="contexto">
-    <button class="accordion-toggle" id="btnToggleContext" aria-controls="panel-context" aria-expanded="false">
+    <!-- Única sección abierta al cargar: da una entrada al contenido en
+         vez de mostrar solo una lista de títulos cerrados. -->
+    <button class="accordion-toggle" id="btnToggleContext" aria-controls="panel-context" aria-expanded="true">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
       <span class="accordion-toggle-label">01 · Contexto del negocio</span>
       <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
 
-    <div class="accordion-panel hidden" id="panel-context">
+    <div class="accordion-panel" id="panel-context">
       <div class="info-block-item">
         <h3 class="info-label">La empresa</h3>
         <p>Marketplace líder de retail en Latinoamérica, con 15 años en el mercado, 85 millones de usuarios registrados y 28 millones de usuarios activos mensuales.</p>
@@ -329,7 +331,7 @@
       </svg>
       <div class="variant-body">
         <div class="variant-name">Variante D — Pago simplificado</div>
-        <div class="variant-desc">El proceso de pago se completa en menos pasos.</div>
+        <div class="variant-desc">El proceso de pago se completa en una sola pantalla y con menos campos.</div>
       </div>
       <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
@@ -350,15 +352,11 @@
         <rect x="10" y="44" width="24" height="3.5" rx="1.5" fill="var(--gray-400)"/>
         <rect x="10" y="50" width="20" height="3.5" rx="1.5" fill="var(--gray-400)"/>
         <rect x="10" y="56" width="28" height="3.5" rx="1.5" fill="var(--gray-600)"/>
-        <circle cx="20" cy="74" r="4" fill="var(--gray-300)"/>
-        <line x1="24" y1="74" x2="46" y2="74" stroke="var(--gray-300)"/>
-        <circle cx="50" cy="74" r="4" fill="var(--gray-300)"/>
-        <line x1="54" y1="74" x2="76" y2="74" stroke="var(--gray-300)"/>
-        <circle cx="80" cy="74" r="4" fill="var(--gray-300)"/>
+        <rect x="15" y="70" width="70" height="7" rx="3.5" fill="var(--gray-400)"/>
       </svg>
       <div class="variant-body">
         <div class="variant-name">Variante E — Completa</div>
-        <div class="variant-desc">Incluye detalle de costos, fecha estimada de entrega y un proceso de pago más simple.</div>
+        <div class="variant-desc">Incluye detalle de costos, fecha estimada de entrega y el pago en una sola pantalla.</div>
       </div>
       <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
