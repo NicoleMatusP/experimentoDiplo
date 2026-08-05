@@ -185,12 +185,35 @@
     </div>
   </section>
 
+  <div class="hub-layout">
+
+  <!-- 9. DISEÑO ESTADÍSTICO -->
+  <aside class="factsheet-panel" id="estadistica">
+    <button class="accordion-toggle" id="btnToggleFactsheet" aria-controls="factsheet" aria-expanded="false">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      <span class="accordion-toggle-label">06 · Diseño estadístico</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="factsheet">
+      <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
+      <table class="factsheet-table">
+        <tr><td>Conversión base actual</td><td>36%</td></tr>
+        <tr><td>Conversión mínima a detectar</td><td>40%</td></tr>
+        <tr><td>Nivel de confianza ajustado (Bonferroni, 4 comparaciones vs. control)</td><td>98.75%</td></tr>
+        <tr><td>Poder estadístico</td><td>80%</td></tr>
+        <tr><td>Muestra mínima por variante</td><td>~2.400 – 2.600 usuarios</td></tr>
+        <tr><td>Muestra total estimada (5 variantes)</td><td>~12.000 – 13.000 usuarios</td></tr>
+        <tr><td>Duración sugerida</td><td>1–2 ciclos semanales (7–14 días)</td></tr>
+      </table>
+    </div>
+  </aside>
+
   <!-- 10. LAS 5 VARIANTES A PROBAR -->
   <section class="page-section" id="variantes">
-  <h2 class="section-heading">07 · Elegí una variante para probar</h2>
+  <h2 class="section-heading">07 · Elige una variante para probar</h2>
   <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
-  <div class="hub-layout">
   <div class="variant-list">
 
     <a class="variant-card" href="variante-a-control/index.html">
@@ -321,30 +344,9 @@
     </a>
 
   </div>
-
-  <aside class="factsheet-panel" id="estadistica">
-    <button class="accordion-toggle" id="btnToggleFactsheet" aria-controls="factsheet" aria-expanded="false">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-      <span class="accordion-toggle-label">06 · Diseño estadístico</span>
-      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </button>
-
-    <div class="accordion-panel hidden" id="factsheet">
-      <p class="factsheet-note">Uso interno del equipo. Diseño estadístico del test A/B/C/D/E de conversión de checkout.</p>
-      <table class="factsheet-table">
-        <tr><td>Conversión base actual</td><td>36%</td></tr>
-        <tr><td>Conversión mínima a detectar</td><td>40%</td></tr>
-        <tr><td>Nivel de confianza ajustado (Bonferroni, 4 comparaciones vs. control)</td><td>98.75%</td></tr>
-        <tr><td>Poder estadístico</td><td>80%</td></tr>
-        <tr><td>Muestra mínima por variante</td><td>~2.400 – 2.600 usuarios</td></tr>
-        <tr><td>Muestra total estimada (5 variantes)</td><td>~12.000 – 13.000 usuarios</td></tr>
-        <tr><td>Duración sugerida</td><td>1–2 ciclos semanales (7–14 días)</td></tr>
-      </table>
-    </div>
-  </aside>
+  </section>
 
   </div>
-  </section>
 
 </main>
 

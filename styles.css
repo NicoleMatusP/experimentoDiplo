@@ -288,6 +288,7 @@ html {
 .hub-layout {
   display: flex;
   flex-direction: column;
+  gap: 24px;
 }
 
 /* Tarjetas de variante */
@@ -295,7 +296,6 @@ html {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 28px;
 }
 .variant-card {
   display: flex;
@@ -392,12 +392,16 @@ html {
     align-items: flex-start;
     gap: 28px;
   }
-  .variant-list {
+  /* El HTML pone "Diseño estadístico" antes que "Variantes" (así el
+     orden de lectura respeta la numeración 06 → 07), pero visualmente
+     en desktop las tarjetas van a la izquierda como antes. */
+  #variantes {
+    order: 1;
     flex: 1;
     min-width: 0;
-    margin-bottom: 0;
   }
   .factsheet-panel {
+    order: 2;
     width: 300px;
     flex-shrink: 0;
   }
