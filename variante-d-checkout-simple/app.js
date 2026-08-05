@@ -139,6 +139,39 @@ function renderCheckoutSummary() {
 }
 
 // ---------------------------------------------------------------------------
+// Medio de pago: tarjeta guardada preseleccionada, modificable
+// ---------------------------------------------------------------------------
+const SAVED_CARD = { brand: 'Visa', last4: '4242', holder: 'Nicole Matus', expiry: '08/29' };
+let useSavedCard = true;
+
+function getCardDisplayText() {
+  if (useSavedCard) {
+    return `${SAVED_CARD.brand} •••• ${SAVED_CARD.last4}`;
+  }
+  const cardName = document.getElementById('cardName').value.trim();
+  const cardNumber = document.getElementById('cardNumber').value.trim();
+  const last4 = cardNumber.replace(/\s/g, '').slice(-4);
+  return cardNumber ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}` : '—';
+}
+
+function toggleCardViews() {
+  document.getElementById('savedCardView').classList.toggle('hidden', !useSavedCard);
+  document.getElementById('cardFormView').classList.toggle('hidden', useSavedCard);
+}
+
+document.getElementById('btnChangeCard').addEventListener('click', () => {
+  useSavedCard = false;
+  logEvent('click', { button: 'usar_otra_tarjeta' });
+  toggleCardViews();
+});
+
+document.getElementById('btnUseSavedCard').addEventListener('click', () => {
+  useSavedCard = true;
+  logEvent('click', { button: 'usar_tarjeta_guardada' });
+  toggleCardViews();
+});
+
+// ---------------------------------------------------------------------------
 // Dirección de envío: la guardada viene preseleccionada, se puede cambiar
 // ---------------------------------------------------------------------------
 const SAVED_ADDRESS = {
@@ -244,12 +277,7 @@ document.getElementById('btnConfirm').addEventListener('click', () => {
 
   document.getElementById('addressValue3').textContent = getAddressText();
 
-  const cardName = document.getElementById('cardName').value.trim();
-  const cardNumber = document.getElementById('cardNumber').value.trim();
-  const last4 = cardNumber.replace(/\s/g, '').slice(-4);
-  document.getElementById('paymentValue3').textContent = cardNumber
-    ? `${cardName || 'Tarjeta'} •••• ${last4.padStart(4, '•')}`
-    : '—';
+  document.getElementById('paymentValue3').textContent = getCardDisplayText();
 
   document.getElementById('cartIndicator').textContent = 'Carrito (0)';
 
@@ -265,6 +293,8 @@ document.getElementById('btnRestart').addEventListener('click', () => {
   });
   useSavedAddress = true;
   toggleAddressViews();
+  useSavedCard = true;
+  toggleCardViews();
   renderAll();
   goToCart();
 });
