@@ -72,7 +72,13 @@
 
   <!-- 3. HIPÓTESIS DEL EXPERIMENTO -->
   <section class="page-section" id="hipotesis">
-    <h2 class="section-heading">02 · Hipótesis del experimento</h2>
+    <button class="accordion-toggle" id="btnToggleHypothesis" aria-controls="panel-hypothesis" aria-expanded="false">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.75.75 1.22 1.5 1.41 2.5"></path></svg>
+      <span class="accordion-toggle-label">02 · Hipótesis del experimento</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="panel-hypothesis">
     <div class="hypothesis-list">
 
       <div class="hypothesis-card hyp-1">
@@ -103,13 +109,21 @@
       </div>
 
     </div>
+    </div>
   </section>
 
   <!-- 4. OBJETIVO Y RESULTADOS ESPERADOS -->
   <section class="page-section" id="objetivo">
-    <h2 class="section-heading">03 · Objetivo y resultados esperados</h2>
+    <button class="accordion-toggle" id="btnToggleObjective" aria-controls="panel-objective" aria-expanded="false">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+      <span class="accordion-toggle-label">03 · Objetivo y resultados esperados</span>
+      <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+
+    <div class="accordion-panel hidden" id="panel-objective">
     <p class="section-text"><strong>Qué queremos aprender:</strong> si transparentar anticipadamente el costo total y la fecha de entrega, junto con simplificar el checkout, reduce la incertidumbre y el esfuerzo que dificultan completar la compra.</p>
     <p class="section-text"><strong>Resultado deseado:</strong> aumentar el avance desde el carrito al pago y la tasa de finalización de compra, reduciendo el abandono y el tiempo promedio del checkout.</p>
+    </div>
   </section>
 
   <!-- 5, 6, 7. METODOLOGÍA, PÚBLICO OBJETIVO Y DURACIÓN -->
@@ -211,7 +225,13 @@
 
   <!-- 10. LAS 5 VARIANTES A PROBAR -->
   <section class="page-section" id="variantes">
-  <h2 class="section-heading">07 · Elige una variante para probar</h2>
+  <button class="accordion-toggle" id="btnToggleVariants" aria-controls="panel-variants" aria-expanded="false">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+    <span class="accordion-toggle-label">07 · Elige una variante para probar</span>
+    <svg class="icon accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </button>
+
+  <div class="accordion-panel hidden" id="panel-variants">
   <p class="page-intro">Cada tarjeta abre el flujo completo de compra (Carrito → Pago → Confirmación) de esa variante.</p>
 
   <div class="variant-list">
@@ -343,6 +363,7 @@
       <svg class="icon variant-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
 
+  </div>
   </div>
   </section>
 

@@ -405,7 +405,13 @@ html {
     width: 300px;
     flex-shrink: 0;
   }
-  .factsheet-panel .accordion-toggle { display: none; }
+  /* En desktop, la columna de variantes y la ficha estadística se ven
+     siempre desplegadas (sin botón), como un panel fijo al lado del otro. */
+  #variantes .accordion-toggle,
+  .factsheet-panel .accordion-toggle {
+    display: none;
+  }
+  #variantes .accordion-panel.hidden,
   .factsheet-panel .accordion-panel.hidden {
     display: block !important;
     margin-top: 0;
